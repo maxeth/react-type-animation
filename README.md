@@ -1,6 +1,6 @@
 # react-type-animation
 
-> React wrapper for [typical](https://github.com/camwiegert/typical) with extended functionality.
+React wrapper for [typical](https://github.com/camwiegert/typical) with extended functionality.
 
 ## Install
 
@@ -18,7 +18,6 @@ const ExampleComponent = () => {
     <TypeAnimation
       cursor={false}
       sequence={['React typing animation based on typical', 1000, '']}
-      loop={0}
       wrapper="h2"
     />
   );
@@ -32,6 +31,6 @@ const ExampleComponent = () => {
 | Prop       | Required | Type    | Example                | Description                                          |
 | ---------- | -------- | ------- | ---------------------- | ---------------------------------------------------- |
 | `wrapper`  | no       | string  | `p`,`h2`,`div`         | Key of HTML element that animation is wrapped around |
-| `sequence` | yes      | []      | `['One', 1000, 'Two']` | Animation steps: [Text, Delay, Text [...]]           |
-| `loop`     | no       | number  | `0`, `Infinity`        | Amount of animation repititions                      |
+| `sequence` | yes      | []      | `['One', 1000, 'Two']` | Animation steps: [Text, Delay]                       |
+| `repeat`   | no       | number  | `5`,`Infinity`         | Amount of animation repititions                      |
 | `cursor`   | no       | boolean | `false`, `true`        | Display blinking cursor in animation                 |
