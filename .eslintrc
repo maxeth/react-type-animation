@@ -1,0 +1,18 @@
+{
+  "parser": "babel-eslint",
+  "extends": "react-app",
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-shadow": "warn",
+    "jsx-a11y/anchor-is-valid": "off",
+    "space-before-function-paren": "off",
+    "react/jsx-boolean-value": "off",
+    "semi": "off",
+    "react/prop-types": "off"
+  }
+}

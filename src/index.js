@@ -5,7 +5,7 @@ import styles from './styles.css';
 
 const TypeAnimation = ({
   sequence,
-  loop = 0,
+  loop,
   className,
   wrapper = 'p',
   cursor = true
@@ -15,7 +15,7 @@ const TypeAnimation = ({
 
   let finalClassName;
 
-  if (className) {
+  if (className && className.length > 0) {
     if (!cursor) {
       finalClassName = className;
     } else {

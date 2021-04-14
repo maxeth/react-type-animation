@@ -5,7 +5,7 @@
 ## Install
 
 ```bash
-npm install --save react-type-animation
+npm install react-type-animation
 ```
 
 ## Usage
@@ -16,8 +16,8 @@ import TypeAnimation from 'react-type-animation';
 const ExampleComponent = () => {
   return (
     <TypeAnimation
-      cursor={true}
-      sequence={['One', 1000, 'Two', 500]}
+      cursor={false}
+      sequence={['React typing animation based on typical', 1000, '']}
       loop={0}
       wrapper="h2"
     />
@@ -33,5 +33,5 @@ const ExampleComponent = () => {
 | ---------- | -------- | ------- | ---------------------- | ---------------------------------------------------- |
 | `wrapper`  | no       | string  | `p`,`h2`,`div`         | Key of HTML element that animation is wrapped around |
 | `sequence` | yes      | []      | `['One', 1000, 'Two']` | Animation steps: [Text, Delay, Text [...]]           |
-| `loop`     | no       | number  | `3`, `Infinity`        | Amount of animation repititions                      |
+| `loop`     | no       | number  | `0`, `Infinity`        | Amount of animation repititions                      |
 | `cursor`   | no       | boolean | `false`, `true`        | Display blinking cursor in animation                 |
