@@ -4,7 +4,7 @@
   "description": "⌨ React typing animation based on typical.",
   "author": "max37",
   "license": "MIT",
-  "repository": "kozie1337/react-typical",
+  "repository": "kozie1337/react-type-animation",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
