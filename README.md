@@ -32,5 +32,5 @@ const ExampleComponent = () => {
 | ---------- | -------- | ------- | ---------------------- | ---------------------------------------------------- |
 | `wrapper`  | no       | string  | `p`,`h2`,`div`         | Key of HTML element that animation is wrapped around |
 | `sequence` | yes      | []      | `['One', 1000, 'Two']` | Animation steps: [Text, Delay]                       |
-| `repeat`   | no       | number  | `5`,`Infinity`         | Amount of animation repititions                      |
+| `repeat`   | no       | number  | `5`,`Infinity`         | Amount of animation repetitions                      |
 | `cursor`   | no       | boolean | `false`, `true`        | Display blinking cursor in animation                 |
