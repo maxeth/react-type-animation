@@ -5,7 +5,7 @@ import styles from './styles.css';
 
 const TypeAnimation = ({
   sequence,
-  loop,
+  repeat,
   className,
   wrapper = 'p',
   cursor = true
@@ -29,12 +29,12 @@ const TypeAnimation = ({
   }
 
   useEffect(() => {
-    if (loop === Infinity) {
+    if (repeat === Infinity) {
       type(typeRef.current, ...sequence, typeLoop);
-    } else if (typeof loop === 'number') {
+    } else if (typeof repeat === 'number') {
       type(
         typeRef.current,
-        ...Array(loop)
+        ...Array(repeat)
           .fill(sequence)
           .flat()
       );
