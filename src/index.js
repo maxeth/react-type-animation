@@ -11,7 +11,7 @@ const TypeAnimation = ({
   cursor = true
 }) => {
   const typeRef = useRef(null);
-  const classNames = [styles.type];
+  const baseStyle = styles.type;
 
   let finalClassName;
 
@@ -19,12 +19,13 @@ const TypeAnimation = ({
     if (!cursor) {
       finalClassName = className;
     } else {
-      classNames.push(className);
-      finalClassName = classNames.join(' ');
+      finalClassName = `${baseStyle} ${className}`;
     }
   } else {
     if (!cursor) {
       finalClassName = '';
+    } else {
+      finalClassName = baseStyle;
     }
   }
 
