@@ -1,6 +1,6 @@
 # react-type-animation
 
-React wrapper for [typical](https://github.com/camwiegert/typical) with extended functionality.
+React type animation based on [typical](https://github.com/camwiegert/typical).
 
 ## Install
 
@@ -28,9 +28,10 @@ const ExampleComponent = () => {
 
 ## Props
 
-| Prop       | Required | Type    | Example                | Description                                          |
-| ---------- | -------- | ------- | ---------------------- | ---------------------------------------------------- |
-| `wrapper`  | no       | string  | `p`,`h2`,`div`         | Key of HTML element that animation is wrapped around |
-| `sequence` | yes      | []      | `['One', 1000, 'Two']` | Animation steps: [Text, Delay]                       |
-| `repeat`   | no       | number  | `5`,`Infinity`         | Amount of animation repetitions                      |
-| `cursor`   | no       | boolean | `false`, `true`        | Display blinking cursor in animation                 |
+| Prop        | Required | Type    | Example                | Description                                              |
+| ----------- | -------- | ------- | ---------------------- | -------------------------------------------------------- |
+| `sequence`  | yes      | array[] | `['One', 1000, 'Two']` | Animation sequence: TEXT followed by DELAY-IN-MS         |
+| `wrapper`   | no       | string  | `p`,`h2`,`div`         | HTML elements that Animation is wrapped around           |
+| `repeat`    | no       | number  | `3`, `Infinity`        | Amount of animation repetitions                          |
+| `cursor`    | no       | boolean | `false`, `true`        | Display blinking cursor in animation                     |
+| `className` | no       | string  | `custom-class-name`    | HTML class name applied to the wrapper to style the text |

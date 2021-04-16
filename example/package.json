@@ -1,0 +1,19 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "react-scripts start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "file:../node_modules/react",
+    "react-type-animation": "file:../",
+    "react-dom": "^16.4.1",
+    "react-scripts": "^3.2.0"
+  }
+}

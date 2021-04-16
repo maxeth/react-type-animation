@@ -1,6 +1,6 @@
 {
   "name": "react-type-animation",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "⌨ React typing animation based on typical.",
   "author": "max37",
   "license": "MIT",
@@ -15,7 +15,8 @@
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "react-start": "react-scripts start"
   },
   "keywords": [
     "react",
