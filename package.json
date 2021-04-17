@@ -1,7 +1,7 @@
 {
   "name": "react-type-animation",
-  "version": "1.0.5",
-  "description": "⌨ React typing animation based on typical.",
+  "version": "1.0.7",
+  "description": "React typing animation based on typical.",
   "author": "max37",
   "license": "MIT",
   "repository": "kozie1337/react-type-animation",
@@ -20,8 +20,16 @@
   },
   "keywords": [
     "react",
+    "reactjs",
     "animation",
-    "typing"
+    "typing",
+    "typewriter",
+    "typing animation",
+    "type animation",
+    "react typing animation",
+    "react type effect",
+    "type effect",
+    "text animation"
   ],
   "peerDependencies": {
     "prop-types": "^15.5.4",
