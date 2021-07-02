@@ -49,7 +49,7 @@ const Home = () => {
           <SyntaxHighlighter language="javascript">
             {`
        <TypeAnimation
-        cursor={false}
+        cursor={true}
         sequence={[
           'This animation',
           2000,
