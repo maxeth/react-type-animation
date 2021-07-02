@@ -1,6 +1,6 @@
 {
   "name": "react-type-animation",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "React typing animation based on typical.",
   "author": "max37",
   "license": "MIT",
@@ -33,7 +33,7 @@
   ],
   "peerDependencies": {
     "prop-types": "^15.5.4",
-"react": "^15.0.0 || ^16.0.0 || ^17.0.0",
+    "react": "^15.0.0 || ^16.0.0 || ^17.0.0",
     "react-dom": "^15.0.0 || ^16.0.0 || ^17.0.0"
   },
   "devDependencies": {
