@@ -110,7 +110,7 @@ const Home = () => {
           maximum expansion of the text. This can get complicated when
           considering responsive design, but there is no other way to prevent
           the layout-shift besides setting the position of the wrapper to
-          "aboslute".
+          "absolute".
         </div>
       </div>
     </div>
