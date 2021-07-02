@@ -8,6 +8,10 @@ React type animation based on [typical](https://github.com/camwiegert/typical).
 npm install react-type-animation
 ```
 
+## Live Demo
+
+A live demo can be found at: https://react-type-animation.vercel.app/
+
 ## Usage
 
 ```jsx
@@ -24,7 +28,16 @@ const ExampleComponent = () => {
 };
 ```
 
-<img src="https://i.gyazo.com/9badf15d400fbc7f57ea7f4787b7f14e.gif"/>
+## Important Usage Notes ⚠
+
+### Hot-Reload Bug
+
+When using hot-reload, the type animation will most likely be bugged until you hard-reload the page.
+Until this issue is resolved, **you need to hot-reload the page after ever code change** in order to see the animation in a non-bugged state.
+
+### Layout-shift
+
+In order to prevent layout shift caused the type animation's text HTML-element expanding, you need to either wrap the TextAnimation component in a div that has a fixed width/height which is wider than the maximum expansion of the TypeAnimation element, or make that wrapper div's position `absolute`.
 
 ## Props
 
