@@ -1,12 +1,14 @@
 # react-type-animation
 
-React type animation based on [typical](https://github.com/camwiegert/typical).
+Customizable React typing animation component.
 
 ## Install
 
 ```bash
 npm install react-type-animation
 ```
+
+Requires a ```react``` and ```react-dom``` version of at least 15.0.0.
 
 ## Live Demo
 
@@ -33,13 +35,15 @@ const ExampleComponent = () => {
 ### Hot-Reload Bug
 
 When using hot-reload, the type animation will most likely be bugged until you hard-reload the page.
-Until this issue is resolved, **you need to hot-reload the page after ever code change** in order to see the animation in a non-bugged state.
+Until this issue is resolved, **you need to hard-reload the page after ever code change** in order to see the animation in a non-bugged state.
 
 ### Layout-shift
 
-In order to prevent layout shift caused the type animation's text HTML-element expanding, you need to either wrap the TextAnimation component in a div that has a fixed width/height which is wider than the maximum expansion of the TypeAnimation element, or make that wrapper div's position `absolute`.
+In order to prevent layout shift caused by the type animation's text HTML-element expanding, you need to either wrap the TextAnimation component in a div that has a fixed width/height which is wider than the maximum expansion of the TypeAnimation element, or make that wrapper div's position `absolute`.
+
 
 ## Props
+
 
 | Prop        | Required | Type    | Example                | Description                                              |
 | ----------- | -------- | ------- | ---------------------- | -------------------------------------------------------- |
@@ -48,6 +52,7 @@ In order to prevent layout shift caused the type animation's text HTML-element e
 | `repeat`    | no       | number  | `3`, `Infinity`        | Amount of animation repetitions                          |
 | `cursor`    | no       | boolean | `false`, `true`        | Display blinking cursor css-animation                    |
 | `className` | no       | string  | `custom-class-name`    | HTML class name applied to the wrapper to style the text |
+
 
 ## Custom Cursor Animation
 
