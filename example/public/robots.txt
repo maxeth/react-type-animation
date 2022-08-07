@@ -1,8 +1,0 @@
-User-agent: Googlebot-Image
-Disallow: /imageyouwanttodissalow.png
-
-User-agent: Googlebot
-Disallow /pathyouwanttodisallow/
-
-Sitemap: https://yoururl.com/sitemap.xml
-

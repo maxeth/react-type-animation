@@ -1,69 +1,200 @@
-import TypeAnimation from 'react-type-animation';
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import { useState } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { TypeAnimation } from 'react-type-animation';
+
+const Divider = () => <div className="h-1 bg-gray-200 w-full" />;
 
 const Home = () => {
+  const [typingStatus, setTypingStatus] = useState('Initializing');
+
   return (
     <div
       style={{ minHeight: '100vh', minWidth: '95vw' }}
-      className="flex flex-col items-center py-12 space-y-8 overflow-x-hidden"
+      className="flex flex-col items-center py-12 space-y-14 overflow-x-hidden"
     >
       <div>
         <div className="font-bold h-8 text-lg">
           <TypeAnimation
-            cursor={false}
-            sequence={['This text will be repeated infinitely.', 1000, '']}
+            sequence={[
+              'One',
+              1000,
+              'One Two',
+              1000,
+              'One Two Three',
+              1000,
+              'One Two',
+              1000,
+              'One',
+              1000,
+              '',
+              500,
+            ]}
+            // speed={60} <- default
             wrapper="h2"
             repeat={Infinity}
           />
         </div>
+
         <div className="text-base" style={{ width: '45em' }}>
           <SyntaxHighlighter language="javascript">
             {`
-       <TypeAnimation
-        cursor={false}
-        sequence={['This text will be repeated infinitely.', 1000, '']}
-        wrapper="h2"
-        repeat={Infinity}
-       />
+<TypeAnimation
+    sequence={['One', 1000, 'One Two', 1000, 'One Two Three',
+               1000, 'One Two', 1000, 'One', 1000, '', 500 ]}
+                   //  ^ step-wise Continuation
+
+    wrapper="h2"
+    repeat={Infinity} // Repeat this Animation Sequence infinitely
+  />
       `}
           </SyntaxHighlighter>
         </div>
       </div>
-
+      <Divider />
       <div>
-        <div className="font-bold h-7 text-lg">
+        <div className="font-bold h-8 text-lg">
           <TypeAnimation
-            cursor={true}
-            sequence={[
-              'This animation',
-              2000,
-              'Will write',
-              2000,
-              'A sequence three times.',
-            ]}
+            sequence={['Type faster or slower by setting speed.', 1000, '']}
+            speed={75} // Must be in range between 1 and 100!
             wrapper="h2"
-            repeat={3}
+            repeat={Infinity}
           />
         </div>
+        <div className="text-gray-500">Speed: 75</div>
+
+        <div className="font-bold h-8 text-lg mt-5">
+          <TypeAnimation
+            sequence={['Type faster or slower by setting speed.', 1000, '']}
+            speed={60}
+            wrapper="h2"
+            repeat={Infinity}
+          />
+        </div>
+        <div className="text-gray-500">Speed: 60 (default)</div>
+
+        <div className="font-bold h-8 text-lg mt-5">
+          <TypeAnimation
+            sequence={['Type faster or slower by setting speed.', 1000, '']}
+            speed={45}
+            wrapper="h2"
+            repeat={Infinity}
+          />
+        </div>
+        <div className="text-gray-500">Speed: 45</div>
+
         <div className="text-base" style={{ width: '45em' }}>
           <SyntaxHighlighter language="javascript">
             {`
-       <TypeAnimation
-        cursor={true}
-        sequence={[
-          'This animation',
-          2000,
-          'Will write',
-          2000,
-          'A sequence three times.',
-        ]}
-        wrapper="a"
-        repeat={3}
-       />
+<TypeAnimation
+    sequence={['Type faster or slower by setting speed.', 1000, '']}
+    speed={75} // Must be in range between 1 and 100!
+    wrapper="h2"
+    repeat={Infinity}
+  />
       `}
           </SyntaxHighlighter>
         </div>
       </div>
+      <Divider />
+      <div>
+        <div className="font-bold h-8 text-lg">
+          <TypeAnimation
+            sequence={[
+              1500,
+              () => {
+                setTypingStatus('Typing...');
+              },
+              'Use callback-functions to trigger events',
+              1000,
+              () => {
+                setTypingStatus('Deleting...');
+              },
+
+              '',
+              () => {
+                setTypingStatus('Done Deleting');
+              },
+            ]}
+            speed={70}
+            wrapper="div"
+            repeat={Infinity}
+          />
+        </div>
+        Current Status:{' '}
+        <span className="text-lg text-red-800 font-bold">{typingStatus}</span>
+        <div className="text-base" style={{ width: '49em' }}>
+          <SyntaxHighlighter language="javascript">
+            {`
+const [typingStatus, setTypingStatus] = useState('Initializing');
+
+<TypeAnimation
+    sequence={[
+    1500,
+    () => { setTypingStatus('Typing...'); },
+    'Use callback-functions to trigger events',
+    1000,
+    () => { setTypingStatus('Deleting...'); },
+    '',
+    () => { setTypingStatus('Done Deleting'); },
+    ]}
+    speed={70}
+    wrapper="div"
+    repeat={Infinity}
+  />
+      `}
+          </SyntaxHighlighter>
+          <div className="mt-4 text-center" style={{ width: '40em' }}>
+            Use Callback-Functions at any place inside of your animation
+            sequence to perform any actions you want.
+          </div>
+        </div>
+      </div>
+      <Divider />
+      <div>
+        <div className="font-bold h-8 text-lg">
+          <TypeAnimation
+            sequence={[
+              'Performing Async Operation...',
+              () => {
+                // await someFunction(), in practice this could take any time.
+                return new Promise((resolve) => setTimeout(resolve, 3000));
+              },
+              'Done!',
+              1000,
+            ]}
+            speed={70}
+            wrapper="div"
+            repeat={Infinity}
+          />
+        </div>
+
+        <div className="text-base" style={{ width: '49em' }}>
+          <SyntaxHighlighter language="javascript">
+            {`
+
+<TypeAnimation
+    sequence={[
+      'Performing Async Operation...',
+      () => {
+        // e.g. return fetch("https://test.com"), will be awaited 
+        return new Promise((resolve) => setTimeout(resolve, 3000));
+      },
+      'Done!',
+    ]}
+    speed={70}
+    wrapper="div"
+    repeat={Infinity}
+    />
+      `}
+          </SyntaxHighlighter>
+          <div className="mt-4 text-center" style={{ width: '40em' }}>
+            If you return a Promise form your callback function, it will be
+            awaited. For example, you can await an API call simply by returning
+            the Promise from your fetch-function.
+          </div>
+        </div>
+      </div>
+      <Divider />
 
       <div>
         <div
@@ -71,7 +202,7 @@ const Home = () => {
           style={{ width: '20em' }}
         >
           <TypeAnimation
-            cursor={true}
+            cursor={false}
             sequence={[
               'Pre-define width of wrapper',
               2000,
@@ -85,20 +216,22 @@ const Home = () => {
         <div className="text-base">
           <SyntaxHighlighter language="javascript">
             {`
-            // pre-define the width of wrapper to prevent layout shift!
-            <div style={{ width: '20em' }} >
-            <TypeAnimation
-            cursor={true}
-            sequence={[
-              'Pre-define width of wrapper',
-              2000,
-              'to prevent layout-shift.',
-              2000,
-            ]}
-            wrapper="h2"
-            repeat={Infinity}
-           />
-            </div>
+// pre-define the width of wrapper to prevent layout shift!
+<div style={{ width: '20em' }} >
+
+  <TypeAnimation
+    cursor={false}
+    sequence={[
+    'Pre-define width of wrapper',
+    2000,
+    'to prevent layout-shift.',
+    2000,
+     ]}
+    wrapper="h2"
+    repeat={Infinity}
+      />
+
+</div>
       `}
           </SyntaxHighlighter>
         </div>
@@ -113,6 +246,7 @@ const Home = () => {
           "absolute".
         </div>
       </div>
+      <Divider />
     </div>
   );
 };
