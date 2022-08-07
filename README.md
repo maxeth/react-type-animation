@@ -1,14 +1,14 @@
 # react-type-animation
 
-Customizable React typing animation component.
+A customizable React typing animation component.
 
-## Install
+## Installation
 
 ```bash
-npm install react-type-animation
+npm install --save react-type-animation
 ```
 
-Requires a ```react``` and ```react-dom``` version of at least 15.0.0.
+Requires a `react` and `react-dom` version of at least 15.0.0.
 
 ## Live Demo
 
@@ -17,14 +17,20 @@ A live demo can be found at: https://react-type-animation.vercel.app/
 ## Usage
 
 ```jsx
-import TypeAnimation from 'react-type-animation';
+import { TypeAnimation } from 'react-type-animation';
 
 const ExampleComponent = () => {
   return (
     <TypeAnimation
       cursor={false}
-      sequence={['React typing animation based on typical', 1000, '']}
+      sequence={[
+        'One', 1000, 'Two', 2000, 'Three',
+        () => {
+          console.log('Done typing!');
+        }
+      ]}
       wrapper="h2"
+      repeat={Infinity}
     />
   );
 };
@@ -32,27 +38,43 @@ const ExampleComponent = () => {
 
 ## Important Usage Notes ⚠
 
-### Hot-Reload Bug
+### Immutability
 
-When using hot-reload, the type animation will most likely be bugged until you hard-reload the page.
-Until this issue is resolved, **you need to hard-reload the page after ever code change** in order to see the animation in a non-bugged state.
+Due to the nature of the animation, this component is **immutable once rendered**, which means that **props changes will never be reflected**. Otherwise, the animation would have to be reset completely, which would look unnatural.
+
+Here is an example which shows that you cannot render dynamic prop-values:
+
+```jsx
+const [counter, setCounter] = useState(0)
+ <TypeAnimation
+      // DO NOT RENDER DYNAMIC VALUES!
+      sequence={[`${counter}`, 1000, () => {setCounter(counter++)}]} // ANIMATION WILL ALWAYS RENDER 0!
+      repeat={Infinity}
+    />
+```
+
+In the example above, `counter` will always render as "0" within the animation and ignore state changes.
+
+### Hot Reload Bug
+
+Because Hot Reload preserves previous state but re-renders the component, the Animation will start bugging out until you **hard-reload the page**.
+
+Hence, whenever you make changes to the TypeAnimation component, you unfortunately have to reload your page.
 
 ### Layout-shift
 
-In order to prevent layout shift caused by the type animation's text HTML-element expanding, you need to either wrap the TextAnimation component in a div that has a fixed width/height which is wider than the maximum expansion of the TypeAnimation element, or make that wrapper div's position `absolute`.
-
+In order to prevent layout shift caused by the TypeAnimation component's text expanding, when typing long texts, you need to either wrap the TextAnimation component in an HTML element with a fixed width/height which is wider than the maximum expansion of the TypeAnimation element, or make that wrapper's position `absolute`.
 
 ## Props
 
-
-| Prop        | Required | Type    | Example                | Description                                              |
-| ----------- | -------- | ------- | ---------------------- | -------------------------------------------------------- |
-| `sequence`  | yes      | array[] | `['One', 1000, 'Two']` | Animation sequence: TEXT followed by DELAY-IN-MS         |
-| `wrapper`   | no       | string  | `p`,`h2`,`div`         | HTML elements that Animation is wrapped around           |
-| `repeat`    | no       | number  | `3`, `Infinity`        | Amount of animation repetitions                          |
-| `cursor`    | no       | boolean | `false`, `true`        | Display blinking cursor css-animation                    |
-| `className` | no       | string  | `custom-class-name`    | HTML class name applied to the wrapper to style the text |
-
+| Prop        | Required | Type    | Example                  | Description                                              | Default |
+| ----------- | -------- | ------- | ------------------------ | -------------------------------------------------------- | ------- |
+| `sequence`  | yes      | array[] | `['One', 1000, 'Two']`   | Animation Sequence: [TEXT, DELAY-MS, CALLBACK]           | `none`  |
+| `wrapper`   | no       | string  | `p`,`h2`,`div`, `strong` | HTML element tag that wraps the Animation                | `div`   |
+| `speed`     | no       | number  | `55`, `65`               | Speed Of Animation: The lower the slower                 | `65`    |
+| `repeat`    | no       | number  | `3`, `0`, `Infinity`     | Amount of animation repetitions                          | `0`     |
+| `cursor`    | no       | boolean | `false`, `true`          | Display default blinking cursor css-animation            | `true`  |
+| `className` | no       | string  | `custom-class-name`      | HTML class name applied to the wrapper to style the text | `none`  |
 
 ## Custom Cursor Animation
 
