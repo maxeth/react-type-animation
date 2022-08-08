@@ -24,9 +24,9 @@ const ExampleComponent = () => {
     <TypeAnimation
       cursor={false}
       sequence={[
-        'One', 1000, 'Two', 2000, 'Three',
-        () => {
-          console.log('Done typing!');
+        'One', 1000, 'Two', 2000, 'Two Three', // Types 'One', waits 1s, Deletes 'One' and types 'Two', waits 2s, writes 'Three' without deleiting 'Two'
+        () => {                               
+          console.log('Done typing!'); // Place optional callbacks anywhere in the array 
         }
       ]}
       wrapper="h2"
@@ -71,7 +71,7 @@ In order to prevent layout shift caused by the TypeAnimation component's text ex
 | ----------- | -------- | ------- | ------------------------ | -------------------------------------------------------- | ------- |
 | `sequence`  | yes      | array[] | `['One', 1000, 'Two']`   | Animation Sequence: [TEXT, DELAY-MS, CALLBACK]           | `none`  |
 | `wrapper`   | no       | string  | `p`,`h2`,`div`, `strong` | HTML element tag that wraps the Animation                | `div`   |
-| `speed`     | no       | number  | `55`, `65`               | Speed Of Animation: The lower the slower                 | `65`    |
+| `speed`     | no       | number  | `55`, `65`               | Speed Of Animation: The lower the slower                 | `60`    |
 | `repeat`    | no       | number  | `3`, `0`, `Infinity`     | Amount of animation repetitions                          | `0`     |
 | `cursor`    | no       | boolean | `false`, `true`          | Display default blinking cursor css-animation            | `true`  |
 | `className` | no       | string  | `custom-class-name`      | HTML class name applied to the wrapper to style the text | `none`  |
