@@ -41,8 +41,8 @@ export default [
         tsconfig: './tsconfig.json'
       }),
       resolve(),
-      commonjs()
-      //      terser()
+      commonjs(),
+      terser()
     ]
   },
   {
