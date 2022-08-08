@@ -105,6 +105,9 @@ const Home = () => {
                 setTypingStatus('Typing...');
               },
               'Use callback-functions to trigger events',
+              () => {
+                setTypingStatus('Done Typing');
+              },
               1000,
               () => {
                 setTypingStatus('Deleting...');
@@ -128,15 +131,24 @@ const Home = () => {
 const [typingStatus, setTypingStatus] = useState('Initializing');
 
 <TypeAnimation
-    sequence={[
-    1500,
-    () => { setTypingStatus('Typing...'); },
-    'Use callback-functions to trigger events',
-    1000,
-    () => { setTypingStatus('Deleting...'); },
-    '',
-    () => { setTypingStatus('Done Deleting'); },
-    ]}
+sequence={[
+      1500,
+      () => {
+        setTypingStatus('Typing...');
+      },
+      'Use callback-functions to trigger events',
+      () => {
+       setTypingStatus('Done Typing');
+      },
+      1000,
+      () => {
+        setTypingStatus('Deleting...');
+      },
+      '',
+      () => {
+        setTypingStatus('Done Deleting');
+      },
+     ]}
     speed={70}
     wrapper="div"
     repeat={Infinity}
@@ -145,7 +157,10 @@ const [typingStatus, setTypingStatus] = useState('Initializing');
           </SyntaxHighlighter>
           <div className="mt-4 text-center" style={{ width: '40em' }}>
             Use Callback-Functions at any place inside of your animation
-            sequence to perform any actions you want.
+            sequence to perform any (global) actions you want. An exemplary
+            use-case for this is triggering some state-changes to let your
+            application know at which state of typing the animation currently
+            is, and adjusting some other visual elements accordingly.
           </div>
         </div>
       </div>
@@ -190,7 +205,9 @@ const [typingStatus, setTypingStatus] = useState('Initializing');
           <div className="mt-4 text-center" style={{ width: '40em' }}>
             If you return a Promise from your callback function, it will be
             awaited. For example, you can await an API call simply by returning
-            the Promise from your fetch-function.
+            the Promise from your fetch-function. An exemplary use-case for this
+            is giving users feedback on completion of async opeartions like API
+            calls, similar to a loading bar.
           </div>
         </div>
       </div>
