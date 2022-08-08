@@ -188,7 +188,7 @@ const [typingStatus, setTypingStatus] = useState('Initializing');
       `}
           </SyntaxHighlighter>
           <div className="mt-4 text-center" style={{ width: '40em' }}>
-            If you return a Promise form your callback function, it will be
+            If you return a Promise from your callback function, it will be
             awaited. For example, you can await an API call simply by returning
             the Promise from your fetch-function.
           </div>
