@@ -27,7 +27,7 @@ const Home = () => {
               'One',
               1000,
               '',
-              500,
+              1000,
             ]}
             // speed={60} <- default
             wrapper="h2"
@@ -41,7 +41,31 @@ const Home = () => {
 <TypeAnimation
     sequence={['One', 1000, 'One Two', 1000, 'One Two Three',
                1000, 'One Two', 1000, 'One', 1000, '', 500 ]}
-                   //  ^ step-wise Continuation
+                   //  Continuing previous Text
+
+    wrapper="h2"
+    repeat={Infinity} // Repeat this Animation Sequence infinitely
+  />
+      `}
+          </SyntaxHighlighter>
+        </div>
+      </div>
+      <Divider />
+      <div>
+        <div className="font-bold h-8 text-lg">
+          <TypeAnimation
+            sequence={['One', 1000, 'Two', 1000, 'Three']}
+            wrapper="h2"
+            repeat={Infinity}
+          />
+        </div>
+
+        <div className="text-base" style={{ width: '45em' }}>
+          <SyntaxHighlighter language="javascript">
+            {`
+<TypeAnimation
+    sequence={['One', 1000, 'Two', 1000, 'Three' ]}
+                   //  Replacing previous Text
 
     wrapper="h2"
     repeat={Infinity} // Repeat this Animation Sequence infinitely
