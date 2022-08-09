@@ -4,7 +4,6 @@ import { type, type as typeloop } from '../../typical';
 import styles from './index.module.css';
 
 type Speed =
-  | 0
   | 1
   | 2
   | 3
@@ -140,7 +139,9 @@ const TypeAnimation: React.FC<TypeAnimationProps &
   style
 }) => {
   speed = Math.abs(speed - 100) as Speed;
+
   const typeRef = useRef(null);
+
   let baseStyle = styles.type;
 
   let finalClassName;
@@ -166,7 +167,7 @@ const TypeAnimation: React.FC<TypeAnimationProps &
       type(
         typeRef.current,
         speed,
-        ...Array(repeat)
+        ...Array(1 + repeat) // Animation should be performed (1 +repeat) times
           .fill(sequence)
           .flat()
       );
