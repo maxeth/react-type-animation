@@ -10,7 +10,7 @@ npm install --save react-type-animation
 
 Requires a `react` and `react-dom` version of at least 15.0.0.
 
-## Live Demo
+## Live Demo & Examples
 
 A live demo can be found at: https://react-type-animation.vercel.app/
 
@@ -22,15 +22,20 @@ import { TypeAnimation } from 'react-type-animation';
 const ExampleComponent = () => {
   return (
     <TypeAnimation
-      cursor={false}
       sequence={[
-        'One', 1000, 'Two', 2000, 'Two Three', // Types 'One', waits 1s, Deletes 'One' and types 'Two', waits 2s, writes 'Three' without deleiting 'Two'
-        () => {                               
-          console.log('Done typing!'); // Place optional callbacks anywhere in the array 
+        'One', // Types 'One'
+        1000, // Waits 1s
+        'Two', // Deletes 'One' and types 'Two
+        2000, // Waits 2s
+        'Two Three', // Types 'Three' without deleiting 'Two'
+        () => {
+          console.log('Done typing!'); // Place optional callbacks anywhere in the array
         }
       ]}
-      wrapper="h2"
+      wrapper="div"
+      cursor={true}
       repeat={Infinity}
+      style={{ fontSize: '2em' }}
     />
   );
 };
@@ -67,18 +72,19 @@ In order to prevent layout shift caused by the TypeAnimation component's text ex
 
 ## Props
 
-| Prop        | Required | Type    | Example                  | Description                                              | Default |
-| ----------- | -------- | ------- | ------------------------ | -------------------------------------------------------- | ------- |
-| `sequence`  | yes      | array[] | `['One', 1000, 'Two']`   | Animation Sequence: [TEXT, DELAY-MS, CALLBACK]           | `none`  |
-| `wrapper`   | no       | string  | `p`,`h2`,`div`, `strong` | HTML element tag that wraps the Animation                | `div`   |
-| `speed`     | no       | number  | `55`, `65`               | Speed Of Animation: The lower the slower                 | `60`    |
-| `repeat`    | no       | number  | `3`, `0`, `Infinity`     | Amount of animation repetitions                          | `0`     |
-| `cursor`    | no       | boolean | `false`, `true`          | Display default blinking cursor css-animation            | `true`  |
-| `className` | no       | string  | `custom-class-name`      | HTML class name applied to the wrapper to style the text | `none`  |
+| Prop        | Required | Type    | Example                  | Description                                                 | Default |
+| ----------- | -------- | ------- | ------------------------ | ----------------------------------------------------------- | ------- |
+| `sequence`  | yes      | array[] | `['One', 1000, 'Two']`   | Animation Sequence: [TEXT, DELAY-MS, CALLBACK]              | `none`  |
+| `wrapper`   | no       | string  | `p`,`h2`,`div`, `strong` | HTML element tag that wraps the Animation                   | `div`   |
+| `speed`     | no       | number  | `45`, `75`               | Speed Of Animation: **between 1-100**, The lower the slower | `60`    |
+| `repeat`    | no       | number  | `0`, `3`, `Infinity`     | Amount of animation repetitions                             | `0`     |
+| `cursor`    | no       | boolean | `false`, `true`          | Display default blinking cursor css-animation               | `true`  |
+| `className` | no       | string  | `custom-class-name`      | HTML class name applied to the wrapper to style the text    | `none`  |
+| `style`     | no       | object  | `{fontSize: '2em'}`      | JSX inline style object                                     | `none`  |
 
 ## Custom Cursor Animation
 
-If you want to apply a custom cursor animation, set the `cursor` prop to `false` (which prevents any default css-styles from being applied) and set a custom `className` prop to the TypeAnimation component with your own css styles.
+If you wish to apply a custom cursor animation, set the `cursor` prop to `false` (**which prevents any default css-styles from being applied**) and set a custom `className` prop to the TypeAnimation component with your own css style classes.
 
 These are the base styles for the cursor animation:
 
@@ -95,6 +101,6 @@ These are the base styles for the cursor animation:
 }
 ```
 
-If you want to modify the styles, simply make a styles.css file, copy and modify the styles and pass the prop `className="type"` to apply the custom styles.
+If you wish to modify the styles, also set the `cursor` prop to `false` and simply create and import any css file (or `FILE_NAME.module.css` if using css modules), copy and modify the above styles and pass the prop `className="type"` (or `className={styles.type}` if using css modules) to the `TypeAnimation` component to apply the custom styles.
 
 If you would like the cursor to stop after a specific time, consider using a JSX styling library which lets you define CSS dynamically within your JSX Component, or simply replace `infnite` with a static finite number (like `2s`) inside your custom css file.
