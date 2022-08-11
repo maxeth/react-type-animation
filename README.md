@@ -103,4 +103,4 @@ These are the base styles for the cursor animation:
 
 If you wish to modify the styles, also set the `cursor` prop to `false` and simply create and import any css file (or `FILE_NAME.module.css` if using css modules), copy and modify the above styles and pass the prop `className="type"` (or `className={styles.type}` if using css modules) to the `TypeAnimation` component to apply the custom styles.
 
-If you would like the cursor to stop after a specific time, consider using a JSX styling library which lets you define CSS dynamically within your JSX Component, or simply replace `infnite` with a static finite number (like `2s`) inside your custom css file.
+If you would like the cursor to stop after a specific time, consider using a JSX styling library which lets you define CSS dynamically within your JSX Component, or simply replace `infinite` with a static finite number (like `2s`) inside your custom css file.
