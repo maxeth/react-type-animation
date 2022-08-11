@@ -102,8 +102,7 @@ type Speed =
   | 96
   | 97
   | 98
-  | 99
-  | 100;
+  | 99;
 
 interface TypeAnimationProps {
   sequence: Array<

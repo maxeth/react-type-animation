@@ -27,7 +27,7 @@ const Home = () => {
               'One',
               1000,
               '',
-              1000,
+              1000
             ]}
             style={{ fontSize: '2em' }}
             // speed={60} <- default
@@ -70,7 +70,7 @@ const Home = () => {
                    //  Replacing previous Text
     style={{ fontSize: '2em' }}
     wrapper="h2"
-    repeat={Infinity} // Repeat this Animation Sequence infinitely
+    repeat={Infinity}
   />
       `}
           </SyntaxHighlighter>
@@ -81,7 +81,7 @@ const Home = () => {
         <div className="font-bold h-8 text-lg">
           <TypeAnimation
             sequence={['Type faster or slower by setting speed.', 1000, '']}
-            speed={75} // Must be in range between 1 and 100!
+            speed={75} // Must be in range between 1 and 99!
             wrapper="h2"
             repeat={Infinity}
           />
@@ -142,7 +142,7 @@ const Home = () => {
               '',
               () => {
                 setTypingStatus('Done Deleting');
-              },
+              }
             ]}
             speed={70}
             wrapper="div"
@@ -198,10 +198,10 @@ sequence={[
               'Performing Async Operation...',
               () => {
                 // await someFunction(), in practice this could take any time.
-                return new Promise((resolve) => setTimeout(resolve, 3000));
+                return new Promise(resolve => setTimeout(resolve, 3000));
               },
               'Done!',
-              1000,
+              1000
             ]}
             speed={70}
             wrapper="div"
@@ -250,7 +250,7 @@ sequence={[
               'Pre-define width of wrapper',
               2000,
               'to prevent layout-shift.',
-              2000,
+              2000
             ]}
             wrapper="h2"
             repeat={Infinity}

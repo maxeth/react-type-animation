@@ -72,15 +72,15 @@ In order to prevent layout shift caused by the TypeAnimation component's text ex
 
 ## Props
 
-| Prop        | Required | Type    | Example                  | Description                                                 | Default |
-| ----------- | -------- | ------- | ------------------------ | ----------------------------------------------------------- | ------- |
-| `sequence`  | yes      | array[] | `['One', 1000, 'Two']`   | Animation Sequence: [TEXT, DELAY-MS, CALLBACK]              | `none`  |
-| `wrapper`   | no       | string  | `p`,`h2`,`div`, `strong` | HTML element tag that wraps the Animation                   | `div`   |
-| `speed`     | no       | number  | `45`, `75`               | Speed Of Animation: **between 1-100**, The lower the slower | `60`    |
-| `repeat`    | no       | number  | `0`, `3`, `Infinity`     | Amount of animation repetitions                             | `0`     |
-| `cursor`    | no       | boolean | `false`, `true`          | Display default blinking cursor css-animation               | `true`  |
-| `className` | no       | string  | `custom-class-name`      | HTML class name applied to the wrapper to style the text    | `none`  |
-| `style`     | no       | object  | `{fontSize: '2em'}`      | JSX inline style object                                     | `none`  |
+| Prop        | Required | Type    | Example                  | Description                                                | Default |
+| ----------- | -------- | ------- | ------------------------ | ---------------------------------------------------------- | ------- |
+| `sequence`  | yes      | array[] | `['One', 1000, 'Two']`   | Animation Sequence: [TEXT, DELAY-MS, CALLBACK]             | `none`  |
+| `wrapper`   | no       | string  | `p`,`h2`,`div`, `strong` | HTML element tag that wraps the Animation                  | `div`   |
+| `speed`     | no       | number  | `45`, `75`               | Speed Of Animation: **between 1-99**, The lower the slower | `60`    |
+| `repeat`    | no       | number  | `0`, `3`, `Infinity`     | Amount of animation repetitions                            | `0`     |
+| `cursor`    | no       | boolean | `false`, `true`          | Display default blinking cursor css-animation              | `true`  |
+| `className` | no       | string  | `custom-class-name`      | HTML class name applied to the wrapper to style the text   | `none`  |
+| `style`     | no       | object  | `{fontSize: '2em'}`      | JSX inline style object                                    | `none`  |
 
 ## Custom Cursor Animation
 
