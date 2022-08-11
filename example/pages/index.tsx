@@ -113,7 +113,7 @@ const Home = () => {
             {`
 <TypeAnimation
     sequence={['Type faster or slower by setting speed.', 1000, '']}
-    speed={75} // Must be in range between 1 and 100!
+    speed={75} // Must be in range between 1 and 99!
     wrapper="h2"
     repeat={Infinity}
   />
