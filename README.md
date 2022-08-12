@@ -45,7 +45,7 @@ const ExampleComponent = () => {
 
 ### Immutability
 
-Due to the nature of the animation, this component is **immutable once rendered**, which means that **props changes will never be reflected**. Otherwise, the animation would have to be reset completely, which would look unnatural.
+Due to the nature of the animation, this component is **permanently memoized**, which means that the component **never** re-renders unless you hard-reload the page, and hence **props changes will not be reflected**. Otherwise, the animation would either bug out or have its sequence required to be reset completely, which due to its nature is not possible at this time (or at least very hacky).
 
 Here is an example which shows that you cannot render dynamic prop-values:
 
@@ -60,9 +60,9 @@ const [counter, setCounter] = useState(0)
 
 In the example above, `counter` will always render as "0" within the animation and ignore state changes.
 
-### Hot Reload Bug
+### Hot Reload NOT Supported
 
-Because Hot Reload preserves previous state but re-renders the component, the Animation will start bugging out until you **hard-reload the page**.
+Because the TypeAnimation component is memoized and **never** re-rendered (see above), yet Hot Reload attempts to re-render the component, **changes to the TypeAnimation component will not render until you hard-reload the page**.
 
 Hence, whenever you make changes to the TypeAnimation component, you unfortunately have to reload your page.
 
