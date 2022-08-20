@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, memo, HtmlHTMLAttributes } from 'react';
 import { type, type as typeloop } from '../../typical';
-
 import styles from './index.module.css';
+import { useEffectOnce } from '../../hooks/useEffectOnce';
 
 type Speed =
   | 1
@@ -159,7 +159,7 @@ const TypeAnimation: React.FC<TypeAnimationProps &
     }
   }
 
-  useEffect(() => {
+  useEffectOnce(() => {
     if (repeat === Infinity) {
       type(typeRef.current, speed, ...sequence, typeloop);
     } else if (typeof repeat === 'number') {
@@ -173,6 +173,9 @@ const TypeAnimation: React.FC<TypeAnimationProps &
     } else {
       type(typeRef.current, speed, ...sequence);
     }
+    return () => {
+      typeRef.current;
+    };
   });
 
   const Wrapper = wrapper;
@@ -180,5 +183,5 @@ const TypeAnimation: React.FC<TypeAnimationProps &
 };
 
 export default memo(TypeAnimation, (_, __) => {
-  return true; // IMMUTABLE!
+  return true; // IMMUTABLE
 });
