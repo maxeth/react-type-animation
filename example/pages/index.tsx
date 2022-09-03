@@ -14,7 +14,6 @@ const Home = () => {
     >
       <div>
         <div className="font-bold h-8 text-lg">
-          {/* <span style={{ fontSize: '2em' }}>We sell</span>{' '} */}
           <TypeAnimation
             sequence={[
               'We produce food for Mice',
