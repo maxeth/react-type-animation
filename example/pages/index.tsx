@@ -14,6 +14,53 @@ const Home = () => {
     >
       <div>
         <div className="font-bold h-8 text-lg">
+          {/* <span style={{ fontSize: '2em' }}>We sell</span>{' '} */}
+          <TypeAnimation
+            sequence={[
+              'We produce food for Mice',
+              1000,
+              'We produce food for Hamsters',
+              1000,
+              'We produce food for Guinea Pigs',
+              1000,
+              'We produce food for Chinchillas',
+              1000,
+            ]}
+            wrapper="span"
+            speed={50}
+            style={{ fontSize: '2em' }}
+            repeat={Infinity}
+          />{' '}
+        </div>
+
+        <div className="text-base" style={{ width: '45em' }}>
+          <SyntaxHighlighter language="javascript">
+            {`
+<TypeAnimation
+    // Same String at the start will only be typed once, initially
+    sequence={[
+    'We produce food for Mice',
+    1000,
+    'We produce food for Hamsters',
+    1000,
+    'We produce food for Guinea Pigs',
+    1000,
+    'We produce food for Chinchillas',
+    1000,
+    ]}
+    speed={50} // Custom Speed from 1-99 - Default Speed: 45
+    style={{ fontSize: '2em' }}
+    wrapper="span" // Animation will be rendered as a <span>
+    repeat={Infinity} // Repeat this Animation Sequence infinitely
+  />
+
+      `}
+          </SyntaxHighlighter>
+        </div>
+      </div>
+      <Divider />
+      <div>
+        <div className="font-bold h-8 text-lg">
           <TypeAnimation
             sequence={[
               'One',
@@ -27,7 +74,7 @@ const Home = () => {
               'One',
               1000,
               '',
-              1000
+              1000,
             ]}
             style={{ fontSize: '2em' }}
             // speed={60} <- default
@@ -44,8 +91,8 @@ const Home = () => {
                1000, 'One Two', 1000, 'One', 1000, '', 500 ]}
                    //  Continuing previous Text
     style={{ fontSize: '2em' }}
-    wrapper="h2"
-    repeat={Infinity} // Repeat this Animation Sequence infinitely
+    wrapper="div"
+    repeat={Infinity} 
   />
       `}
           </SyntaxHighlighter>
@@ -96,7 +143,7 @@ const Home = () => {
             repeat={Infinity}
           />
         </div>
-        <div className="text-gray-500">Speed: 60 (default)</div>
+        <div className="text-gray-500">Speed: 60</div>
 
         <div className="font-bold h-8 text-lg mt-5">
           <TypeAnimation
@@ -106,7 +153,7 @@ const Home = () => {
             repeat={Infinity}
           />
         </div>
-        <div className="text-gray-500">Speed: 45</div>
+        <div className="text-gray-500">Speed: 40 (default)</div>
 
         <div className="text-base" style={{ width: '45em' }}>
           <SyntaxHighlighter language="javascript">
@@ -142,7 +189,7 @@ const Home = () => {
               '',
               () => {
                 setTypingStatus('Done Deleting');
-              }
+              },
             ]}
             speed={70}
             wrapper="div"
@@ -198,10 +245,10 @@ sequence={[
               'Performing Async Operation...',
               () => {
                 // await someFunction(), in practice this could take any time.
-                return new Promise(resolve => setTimeout(resolve, 3000));
+                return new Promise((resolve) => setTimeout(resolve, 3000));
               },
               'Done!',
-              1000
+              1000,
             ]}
             speed={70}
             wrapper="div"
@@ -250,8 +297,9 @@ sequence={[
               'Pre-define width of wrapper',
               2000,
               'to prevent layout-shift.',
-              2000
+              2000,
             ]}
+            speed={60}
             wrapper="h2"
             repeat={Infinity}
           />
@@ -270,6 +318,7 @@ sequence={[
     'to prevent layout-shift.',
     2000,
      ]}
+    speed={60}
     wrapper="h2"
     repeat={Infinity}
       />
