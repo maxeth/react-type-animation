@@ -182,6 +182,6 @@ const TypeAnimation: React.FC<TypeAnimationProps &
   return <Wrapper style={style} className={finalClassName} ref={typeRef} />;
 };
 
-export default memo(TypeAnimation, (_, __) => {
+export memo(TypeAnimation, (_, __) => {
   return true; // IMMUTABLE
 });

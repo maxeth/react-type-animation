@@ -1,1 +1,1 @@
-export { default as TypeAnimation } from './TypeAnimation';
+export { TypeAnimation } from './TypeAnimation';

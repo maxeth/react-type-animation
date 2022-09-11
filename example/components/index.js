@@ -48,4 +48,4 @@ const TypeAnimation = ({
   return <Wrapper className={finalClassName} ref={typeRef} />;
 };
 
-export default memo(TypeAnimation);
+export memo(TypeAnimation);
