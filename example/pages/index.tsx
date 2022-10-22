@@ -122,6 +122,7 @@ const Home = () => {
           </SyntaxHighlighter>
         </div>
       </div>
+
       <Divider />
       <div>
         <div className="font-bold h-8 text-lg">
@@ -159,7 +160,38 @@ const Home = () => {
             {`
 <TypeAnimation
     sequence={['Type faster or slower by setting speed.', 1000, '']}
-    speed={75} // Must be in range between 1 and 99!
+    speed={75} 
+    wrapper="h2"
+    repeat={Infinity}
+  />
+      `}
+          </SyntaxHighlighter>
+        </div>
+      </div>
+      <Divider />
+      <div>
+        <div className="font-bold h-8 text-lg">
+          <TypeAnimation
+            sequence={[
+              'Delete faster or slower by setting deletion speed.',
+              1000,
+              '',
+            ]}
+            speed={75} // Must be in range between 1 and 99!
+            deletionSpeed={99}
+            wrapper="h2"
+            repeat={Infinity}
+          />
+        </div>
+        <div className="text-gray-500">Deletion Speed: 99</div>
+
+        <div className="text-base" style={{ width: '45em' }}>
+          <SyntaxHighlighter language="javascript">
+            {`
+<TypeAnimation
+    sequence={['Delete faster or slower by setting speed.', 1000, '']}
+    speed={75} 
+    deletionSpeed={99}
     wrapper="h2"
     repeat={Infinity}
   />
