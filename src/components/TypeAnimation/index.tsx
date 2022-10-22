@@ -125,6 +125,7 @@ interface TypeAnimationProps {
     | 'b';
   cursor?: boolean;
   speed?: Speed;
+  deletionSpeed?: Speed;
 }
 
 const TypeAnimation: React.FC<TypeAnimationProps &
@@ -133,11 +134,15 @@ const TypeAnimation: React.FC<TypeAnimationProps &
   repeat,
   className,
   speed = 40,
+  deletionSpeed,
   wrapper = 'div',
   cursor = true,
   style
 }) => {
   speed = Math.abs(speed - 100) as Speed;
+  deletionSpeed = (deletionSpeed
+    ? Math.abs(deletionSpeed - 100)
+    : speed) as Speed;
 
   const typeRef = useRef(null);
 
@@ -161,17 +166,18 @@ const TypeAnimation: React.FC<TypeAnimationProps &
 
   useEffectOnce(() => {
     if (repeat === Infinity) {
-      type(typeRef.current, speed, ...sequence, typeloop);
+      type(typeRef.current, speed, deletionSpeed!, ...sequence, typeloop);
     } else if (typeof repeat === 'number') {
       type(
         typeRef.current,
         speed,
+        deletionSpeed!,
         ...Array(1 + repeat) // Animation should be performed (1 +repeat) times
           .fill(sequence)
           .flat()
       );
     } else {
-      type(typeRef.current, speed, ...sequence);
+      type(typeRef.current, speed, deletionSpeed!, ...sequence);
     }
     return () => {
       typeRef.current;

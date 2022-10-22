@@ -52,8 +52,7 @@ Here is an example which shows that you cannot render dynamic prop-values:
 ```jsx
 const [counter, setCounter] = useState(0)
  <TypeAnimation
-      // DO NOT RENDER DYNAMIC VALUES!
-      sequence={[`${counter}`, 1000, () => {setCounter(counter++)}]} // ANIMATION WILL ALWAYS RENDER 0!
+      sequence={[`${counter}`, 1000, () => {setCounter(counter++)}]}
       repeat={Infinity}
     />
 ```
@@ -72,15 +71,16 @@ In order to prevent layout shift caused by the TypeAnimation component's text ex
 
 ## Props
 
-| Prop        | Required | Type    | Example                  | Description                                                | Default |
-| ----------- | -------- | ------- | ------------------------ | ---------------------------------------------------------- | ------- |
-| `sequence`  | yes      | array[] | `['One', 1000, 'Two']`   | Animation Sequence: [TEXT, DELAY-MS, CALLBACK]             | `none`  |
-| `wrapper`   | no       | string  | `p`,`h2`,`div`, `strong` | HTML element tag that wraps the Animation                  | `div`   |
-| `speed`     | no       | number  | `45`, `75`               | Speed Of Animation: **between 1-99**, The lower the slower | `40`    |
-| `repeat`    | no       | number  | `0`, `3`, `Infinity`     | Amount of animation repetitions                            | `0`     |
-| `cursor`    | no       | boolean | `false`, `true`          | Display default blinking cursor css-animation              | `true`  |
-| `className` | no       | string  | `custom-class-name`      | HTML class name applied to the wrapper to style the text   | `none`  |
-| `style`     | no       | object  | `{fontSize: '2em'}`      | JSX inline style object                                    | `none`  |
+| Prop            | Required | Type    | Example                  | Description                                                | Default |
+| --------------- | -------- | ------- | ------------------------ | ---------------------------------------------------------- | ------- |
+| `sequence`      | yes      | array[] | `['One', 1000, 'Two']`   | Animation Sequence: [TEXT, DELAY-MS, CALLBACK]             | `none`  |
+| `wrapper`       | no       | string  | `p`,`h2`,`div`, `strong` | HTML element tag that wraps the Animation                  | `div`   |
+| `speed`         | no       | number  | `45`, `75`               | Speed Of Animation: **between 1-99**, The lower the slower | `40`    |
+| `deletionSpeed` | no       | number  | `45`, `99`               | Custom Speed for Deleting                                  | `speed` |
+| `repeat`        | no       | number  | `0`, `3`, `Infinity`     | Amount of animation repetitions                            | `0`     |
+| `cursor`        | no       | boolean | `false`, `true`          | Display default blinking cursor css-animation              | `true`  |
+| `className`     | no       | string  | `custom-class-name`      | HTML class name applied to the wrapper to style the text   | `none`  |
+| `style`         | no       | object  | `{fontSize: '2em'}`      | JSX inline style object                                    | `none`  |
 
 ## Custom Cursor Animation
 
