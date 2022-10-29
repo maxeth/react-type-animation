@@ -185,6 +185,21 @@ const Home = () => {
         </div>
         <div className="text-gray-500">Deletion Speed: 99</div>
 
+        <div className="font-bold h-8 text-lg mt-8">
+          <TypeAnimation
+            sequence={[
+              'Omit deletion animation by setting omitDeletionAnimation prop.',
+              1000,
+              '',
+            ]}
+            speed={75} // Must be in range between 1 and 99!
+            omitDeletionAnimation={true}
+            wrapper="h2"
+            repeat={Infinity}
+          />
+        </div>
+        <div className="text-gray-500">omitDeletionAnimation = true</div>
+
         <div className="text-base" style={{ width: '45em' }}>
           <SyntaxHighlighter language="javascript">
             {`

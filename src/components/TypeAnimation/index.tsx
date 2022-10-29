@@ -126,6 +126,7 @@ interface TypeAnimationProps {
   cursor?: boolean;
   speed?: Speed;
   deletionSpeed?: Speed;
+  omitDeletionAnimation?: boolean;
 }
 
 const TypeAnimation: React.FC<TypeAnimationProps &
@@ -135,6 +136,7 @@ const TypeAnimation: React.FC<TypeAnimationProps &
   className,
   speed = 40,
   deletionSpeed,
+  omitDeletionAnimation = false,
   wrapper = 'div',
   cursor = true,
   style
@@ -166,18 +168,32 @@ const TypeAnimation: React.FC<TypeAnimationProps &
 
   useEffectOnce(() => {
     if (repeat === Infinity) {
-      type(typeRef.current, speed, deletionSpeed!, ...sequence, typeloop);
+      type(
+        typeRef.current,
+        speed,
+        deletionSpeed!,
+        omitDeletionAnimation,
+        ...sequence,
+        typeloop
+      );
     } else if (typeof repeat === 'number') {
       type(
         typeRef.current,
         speed,
         deletionSpeed!,
+        omitDeletionAnimation,
         ...Array(1 + repeat) // Animation should be performed (1 +repeat) times
           .fill(sequence)
           .flat()
       );
     } else {
-      type(typeRef.current, speed, deletionSpeed!, ...sequence);
+      type(
+        typeRef.current,
+        speed,
+        deletionSpeed!,
+        omitDeletionAnimation,
+        ...sequence
+      );
     }
     return () => {
       typeRef.current;
