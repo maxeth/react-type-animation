@@ -5,7 +5,7 @@ A customizable React typing animation component.
 ## Installation
 
 ```bash
-npm install --save react-type-animation
+npm install react-type-animation
 ```
 
 Requires a `react` and `react-dom` version of at least 15.0.0.
