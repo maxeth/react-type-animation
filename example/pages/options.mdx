@@ -1,0 +1,178 @@
+import { OptionTable } from 'components/Table';
+import { Callout, Tab, Tabs, Steps } from 'nextra-theme-docs';
+
+# Options
+
+## Component Props
+
+<OptionTable
+  options={[
+    [
+      'sequence',
+      'Array<number | string | () => void>',
+      'Animation sequence consisting of: [TEXT, DELAY-IN-MS, CALLBACK-FUNC]',
+      "['One', 1000, 'Two', () => console.log('done typing!')]",
+      '-',
+    ],
+        [
+      'wrapper',
+      'string',
+      "HTML element name that wraps the typing animation. See 'Wrapper CSS' section for related info",
+      "p,h2,div, strong",
+      'span',
+    ],
+                        [
+      'repeat',
+      'number',
+      'Amount of animation repetitions. e.g. 0 = Animation will only be typed out once',
+      "1, 3, Infinity",
+      '0',
+    ],
+                        [
+      'cursor',
+      'boolean',
+      'Whether to display default blinking cursor css-animation',
+      "true, false",
+      'true',
+    ],
+            [
+      'speed',
+      '1,2,..,99 | {type: "keyStrokeDelayInMs", value: number}',
+      'Basic typing speed from 1-99 or exact keystroke delay in milseconds',
+      "25, 50, 99, {type: 'keyStrokeDelayInMs', value: 250}",
+      '40',
+    ],
+                [
+      'deletionSpeed',
+      '1,2,..,99 | {type: "keyStrokeDelayInMs", value: number}',
+      'Basic deletion speed from 1-99 or exact keystroke delay in milseconds',
+      "25, 50, 99, {type: 'keyStrokeDelayInMs', value: 250}",
+      'speed',
+    ],
+                    [
+      'omitDeletionAnimation',
+      'boolean',
+      'If true, deletions will be instant and without animation',
+      "true, false",
+      'false',
+    ],
+        [
+      'className',
+      'string',
+      'HTML class name applied to the wrapper of the typing animation',
+      "some-class-name",
+      '-',
+    ],
+            [
+      'style',
+      'object',
+      'JSX inline style object that will be applied to the wrapper of the typing animation',
+      "{fontSize: '2em'}",
+      '-',
+    ],
+                [
+      'ref',
+      'HTMLElement | null',
+      'A React ref that will be passed to the wrapper of the typing animation',
+      "-",
+      '-',
+    ],
+  ]}
+
+/>
+
+### Props Examples
+
+See [all examples](/examples) to see all props in usage.
+
+- `ref`, `className` see [here](/examples#manipulation-via-css-classes).
+- `speed`, `deletionSpeed` see [here](/examples#custom-speed).
+
+## Custom Cursor Animation
+
+If you wish to apply a custom cursor animation, set the `cursor` prop to `false` and set a custom `className` prop to the `<TypeAnimation/>` component with your own css styles.
+
+<Tabs items={['CSS Modules', 'CSS', 'styled-jsx']}>
+
+<Tab>
+
+```css filename="yourCssModule.module.css"
+.type::after {
+  content: '|';
+  animation: cursor 1.1s infinite step-start;
+}
+
+@keyframes cursor {
+  50% {
+    opacity: 0;
+  }
+}
+```
+
+```tsx
+import styles from './yourCssModule.module.css';
+
+<TypeAnimation
+  cursor={false} // omit the default css typing animation class
+  className={styles.type}
+  sequence={['One', 800, 'One Two']}
+/>;
+```
+
+</Tab>
+
+<Tab>
+
+```css filename="yourGlobalCssFile.css"
+.type::after {
+  content: '|';
+  animation: cursor 1.1s infinite step-start;
+}
+
+@keyframes cursor {
+  50% {
+    opacity: 0;
+  }
+}
+```
+
+```tsx
+import './yourGlobalCssFile.css';
+
+<TypeAnimation
+  cursor={false} // omit the default css typing animation class
+  className="type"
+  sequence={['One', 800, 'One Two']}
+/>;
+```
+
+</Tab>
+
+<Tab>
+  ```tsx
+  <>
+    <TypeAnimation
+      cursor={false} // omit the default css typing animation class
+      className="type"
+      sequence={['One', 800, 'One Two']}
+    />
+    <style global jsx>{`
+      .type::after {
+        content: '|';
+        animation: cursor 1.1s infinite step-start;
+      }
+      @keyframes cursor {
+        50% {
+          opacity: 0;
+        }
+      }
+    `}</style>
+  </>
+  ```
+</Tab>
+
+</Tabs>
+
+### Stop cursor animation
+
+If you would like the cursor to stop being displayed at a specific sequence step, see [here](/examples#manipulation-via-css-classes).

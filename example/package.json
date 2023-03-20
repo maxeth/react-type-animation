@@ -8,11 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^12.2.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "^12.3.4",
+    "nextra": "^2.2.19",
+    "nextra-theme-docs": "^2.2.19",
     "react-syntax-highlighter": "^15.4.3",
-    "react-type-animation": "^2.1.2"
+    "react-type-animation": "latest"
   },
   "devDependencies": {
     "@types/node": "^18.6.4",
@@ -32,6 +32,8 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "postcss": "^8.2.9",
     "prettier": "^2.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "tailwindcss": "^2.1.1",
     "typescript": "^4.7.4"
   }

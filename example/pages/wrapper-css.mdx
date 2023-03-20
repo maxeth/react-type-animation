@@ -1,0 +1,93 @@
+import {
+  SpanCollapsingExample,
+  DisplayBlockCollapsingExample,
+  WordBreakExample,
+} from '../components/examples';
+import { Callout } from 'nextra-theme-docs';
+
+# Wrapper & CSS tips
+
+## Recommended Wrapper
+
+As mentioned in the [props](/options#component-props) section, the default wrapper for the `<TypeAnimation/>` component is a `<span>`.
+
+You should mostly stick to the default value of `span` for the `wrapper` prop because:
+
+1. The `span` element is the semantically correct element for a typing animation
+2. The `span` element can appear as a child of many different HTML elements which should prevent you from running into hard to debug errors.
+
+<Callout emoji="⚠️">
+**Be careful with custom wrappers:** if you set `wrapper='div'` but, for example, accidentally use the `<TypeAnimation/>` component as a child of a `<p>`, this would generate invalid HTML and cause React hydration errors if used with _SSR_ with Next.js or similar.
+</Callout>
+
+## Useful css rules for inline wrappers
+
+Because then `span` is an in-line element, there may be some css styling issues with your typing animations if you don't apply certain styles:
+
+### Preventing layout shift
+
+In most cases, you will have to define fixed dimensions for your wrapper to prevent layout shift.
+
+With an inline wrapper element, such as `span`, the default css behaviour won't allow you to set a fixed height or width to the typing animation in order to prevent layout shift:
+
+<SpanCollapsingExample />
+
+```tsx /height: '200px'/ /width: '300px'/
+// ❌  height and width not being applied
+<RawTypeAnimation
+  style={{ height: '200px', width: '300px' border: 'solid 1px rgb(0,0,0)' }}
+      sequence={[
+          'By default, inline elements automatically expand and cause layout shift.',
+          800,
+          '',
+        ]}
+  repeat={Infinity}
+/>
+```
+
+**Fix**: Apply `display: inline-block` or `display: block`:
+
+<br />
+
+<DisplayBlockCollapsingExample />
+
+```tsx /display: 'block'/ /height: '200px'/ /width: '300px'/ copy
+// ✅ height and width being applied
+<TypeAnimation
+  style={{
+    height: '200px',
+    width: '300px',
+    display: 'block',
+    border: 'solid 1px rgb(0,0,0)',
+  }}
+  sequence={['Some long sentence that wraps.', 800, '']}
+  repeat={Infinity}
+/>
+```
+
+## Other useful wrapper css rules
+
+### Writing Multi-Line
+
+If you'd like to write in new line after each line break, apply `white-space: pre-line`, as shown in [this example](/examples#multiple-lines).
+
+### Word break styles
+
+By altering the css `word-break` property, you can achieve differen't types of word breaks inside your animation:
+
+<br />
+<WordBreakExample wordBreak="break-all" hypens="none" />
+
+```tsx /wordBreak: 'break-all'/ copy
+<TypeAnimation
+  style={{
+    height: '200px',
+    width: '200px',
+    border: 'solid 1px rgb(0,0,0)',
+    display: 'block',
+    wordBreak: 'break-all',
+  }}
+  sequence={['Some long sentence and_some_long_word.', 800, '', 800]}
+  repeat={Infinity}
+/>
+```

@@ -1,0 +1,128 @@
+import TypeAnimation from '../components/TypeAnimation';
+import { Callout, Tab, Tabs, Steps } from 'nextra-theme-docs';
+
+# Get Started
+
+<Steps>
+
+### Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn']}>
+
+  <Tab>
+    ```bash copy
+    npm i react-type-animation
+    ```
+  </Tab>
+    <Tab>
+    ```bash copy
+    pnpm i react-type-animation
+    ```
+  </Tab>
+  <Tab>
+    ```bash copy
+    yarn add react-type-animation
+    ```
+  </Tab>
+</Tabs>
+
+### Basic Usage
+
+```js copy
+import { TypeAnimation } from 'react-type-animation';
+
+const ExampleComponent = () => {
+  return (
+    <TypeAnimation
+      sequence={[
+        'One', // Types 'One'
+        1000, // Waits 1s
+        'Two', // Deletes 'One' and types 'Two'
+        2000, // Waits 2s
+        'Two Three', // Types 'Three' without deleting 'Two'
+        () => {
+          console.log('Sequence completed');
+        },
+      ]}
+      wrapper="span"
+      cursor={true}
+      repeat={Infinity}
+      style={{ fontSize: '2em', display: 'inline-block' }}
+    />
+  );
+};
+```
+
+</Steps>
+
+## Custom Props & Options
+
+See [Options →](/options)
+
+## Examples
+
+See [Examples →](/examples)
+
+## Migrating to v3
+
+From v3.x onwards, the default wrapper is `<span>` instead of `<div>`. **To migrate**, add a `display: inline-block/block` or `wrapper="div"` css rule to all `<TypeAnimation/>` occurances with unspecified wrapper - or leave unchanged if you don't experience any new layout issues.
+
+## Important Usage Notes
+
+### Immutability
+
+Due to the nature of the animation, this component is **permanently memoized**, which means that the `<TypeAnimation/>` component **never re-renders unless you hard-reload the page**, and hence **props changes will not be reflected**.
+
+<Callout type="info" emoji="💡">
+  Note: You can still dynamically manipulate the styles of the animation via
+  `ref` or `state` as shown in the
+  [examples](/examples#manipulation-via-css-classes).
+</Callout>
+
+Here is an example which shows that you cannot render dynamic prop-values:
+
+```jsx copy
+const [counter, setCounter] = useState(0)
+ <TypeAnimation
+      sequence={[`${counter}`, 1000, () => setCounter(++counter), '']}
+      repeat={Infinity}
+    />
+```
+
+**Renders**: <TypeAnimation wrapper="span"
+repeat={Infinity}
+sequence={['0', 1000, '']} />
+
+In the example above, `counter` will always render as "0" within the animation and ignore state changes.
+
+---
+
+### Hot Reload NOT Supported
+
+Because the TypeAnimation component is memoized and **never** re-rendered (see above), yet Hot Reload attempts to re-render the component, **changes to the TypeAnimation component will not render until you hard-reload the page**.
+
+Hence, whenever you make changes to the TypeAnimation component, you unfortunately have to reload your page.
+
+---
+
+### Pure Text Limitation
+
+The Component is limited to **pure text** and cannot animate nested DOM elements:
+
+❌ **Unsupported:**
+`<Wrapper> One <a href="#">Two</a> <div>Three</div> </Wrapper>`
+
+✅ **Supported:**
+`<Wrapper>One Two Three</Wrapper>`
+
+---
+
+### Layout-shift
+
+As the typing animation progresses, the wrapper may expand and cause layout shift. See [here](/wrapper-css#preventing-layout-shift) for solutions.
+
+---
+
+### Changing the Wrapper Element
+
+It's recommended to **not change** the default `wrapper` prop (`span`) without a reason, as it may cause invalid HTML, hydration issues and semantical incorrectness as described [here](/wrapper-css).

@@ -1,0 +1,303 @@
+import {
+  CallbackExample,
+  ContinuationExample,
+  StateManipulationColorExample,
+  LandingPageExample,
+  ReplacementExample,
+  CustomSpeedExample,
+  MultipleLinesExample,
+  ForwardRefExample,
+} from '../components/examples';
+import { Callout } from 'nextra-theme-docs';
+
+# Examples
+
+---
+
+## Landing Page Animation
+
+Include the initial text in every string, and the **static part will only be typed out once**.
+
+<br />
+
+<LandingPageExample />
+
+```tsx copy
+<TypeAnimation
+  sequence={[
+    // Same String at the start will only be typed once, initially
+    'We produce food for Mice',
+    1000,
+    'We produce food for Hamsters',
+    1000,
+    'We produce food for Guinea Pigs',
+    1000,
+    'We produce food for Chinchillas',
+    1000,
+  ]}
+  speed={50}
+  style={{ fontSize: '2em' }}
+  repeat={Infinity}
+/>
+```
+
+---
+
+## Continuation
+
+<br />
+
+<ContinuationExample />
+
+```tsx copy
+<TypeAnimation
+  sequence={[
+    'One',
+    500,
+    'One Two', //  Continuing previous Text
+    500,
+    'One Two Three',
+    500,
+    'One Two',
+    500,
+    'One',
+    500,
+    '',
+    500,
+  ]}
+  style={{ fontSize: '2em' }}
+  repeat={Infinity}
+/>
+```
+
+---
+
+## Replacement
+
+<br />
+
+<ReplacementExample />
+
+```tsx copy
+<TypeAnimation
+  sequence={['One', 500, 'Two', 500, 'Three', 500]}
+  style={{ fontSize: '2em' }}
+  repeat={Infinity}
+/>
+```
+
+---
+
+## Custom Speed
+
+As mentioned in the [props](/options#component-props) section, you can specify both the typing `speed` and `deletionSpeed` with a simple relative number between 1-99 or an exactly specified keystroke delay.
+
+<br />
+
+<CustomSpeedExample />
+
+<Callout type="info" emoji="💡">
+  Note: by default, the animation **adds a random delay relative to your
+  provided `speed` and `deletionSpeed`** after each keystroke to make the typing
+  animation look more natural.
+</Callout>
+
+---
+
+## Multiple Lines
+
+By addding the `white-space: pre-line` css style and placing `'\n'` anywhere in your text, or making actual line breaks inside a string literal, you can write in multiple lines.
+
+<br />
+
+<MultipleLinesExample />
+
+```tsx copy /whiteSpace: 'pre-line'/ /\n/
+<TypeAnimation
+  style={{ whiteSpace: 'pre-line', height: '195px', display: 'block' }}
+  sequence={[
+    `Line one\nLine Two\nLine Three\nLine Four\nLine Five
+Line Eight`, // actual line-break inside string literal also gets animated in new line, but ensure there are no leading spaces
+    1000,
+    '',
+  ]}
+  repeat={Infinity}
+/>
+```
+
+<Callout type="warning" emoji="⚠️">
+  Using the explicit `\n` new-line is preferred, because your code formatter may
+  add spaces in new lines of the string literal that will be typed out as an
+  empty string and hence unintentionally delay the animation.
+</Callout>
+
+<Callout type="info" emoji="💡">
+  Pre-define the height and width of the parent element to prevent layout shift
+  when typing multi-lines
+</Callout>
+
+---
+
+## Callback functions
+
+Use callback functions at any place inside of your animation
+sequence to perform any (global) actions you want. An exemplary
+use-case for this is calling functions or state updates that [manipulate the styles](#manipulation-via-state) of your animation component, or let your
+application know at which state of typing the animation currently
+is, and adjusting some other visual elements accordingly.
+
+<br />
+
+<CallbackExample />
+
+```jsx copy
+const [typingStatus, setTypingStatus] = useState('Initializing');
+
+<TypeAnimation
+  sequence={[
+    1500,
+    () => {
+      setTypingStatus('Typing...');
+    },
+    'Use callback-functions to trigger events',
+    () => {
+      setTypingStatus('Done Typing');
+    },
+    1000,
+    () => {
+      setTypingStatus('Deleting...');
+    },
+    '',
+    () => {
+      setTypingStatus('Done Deleting');
+    },
+  ]}
+  repeat={Infinity}
+/>;
+```
+
+### Manipulation via css classes
+
+It's possible to manipulate the animation styles in order to, for example, **stop the cursor animation at a specific point within the animation sequence**:
+
+<br />
+
+<ForwardRefExample />
+
+```tsx {1,10,12,14,21-22,27,34,36,43-53}
+const ref = React.createRef<HTMLSpanElement>(); // HTMLSpanElement because 'span' is the default wrapper element of the <TypeAnimation/> component
+
+const CURSOR_CLASS_NAME = 'custom-type-animation-cursor';
+
+const showCursorAnimation = (show: boolean) => {
+  if (!ref.current) {
+    return;
+  }
+
+  const el = ref.current;
+  if (show) {
+    el.classList.add(CURSOR_CLASS_NAME);
+  } else {
+    el.classList.remove(CURSOR_CLASS_NAME);
+  }
+};
+
+return (
+  <>
+    <TypeAnimation
+      ref={ref}
+      cursor={false} // omit the default css typing animation class, otherwise we won't be able to manipulate it manually
+      style={{
+        fontSize: '1.75rem',
+        height: '45px',
+      }}
+      className={CURSOR_CLASS_NAME} // pass custom cursor className that will be manipulated (defaults below)
+      sequence={[
+        'One',
+        800,
+        'One Two',
+        800,
+        'One Two Three',
+        () => showCursorAnimation(false),
+        2000,
+        () => showCursorAnimation(true),
+        '',
+      ]}
+      repeat={Infinity}
+    />
+
+    {/* Copy over the default typing styles. Also works with simple global css files or css modules */}
+    <style global jsx>{`
+      .custom-type-animation-cursor::after {
+        content: '|';
+        animation: cursor 1.1s infinite step-start;
+      }
+      @keyframes cursor {
+        50% {
+          opacity: 0;
+        }
+      }
+    `}</style>
+  </>
+);
+```
+
+### Manipulation via state
+
+By applying dynamic styles to **the parent element** of the `TypeAnimation` component, you can easily manipulate styles without classNames and passing ref.
+
+<br />
+
+<StateManipulationColorExample />
+
+```tsx {1,8,17,20,23,43}
+const [textColor, setTextColor] = useState('red');
+
+return (
+  <>
+    <div
+      style={{
+        fontSize: '35px',
+        color: textColor,
+        /* when working without ref and classNames, the manipulated style needs to be
+         applied to the parent element, because the TypeAnimation component is perma-memoized */
+      }}
+    >
+      <TypeAnimation
+        sequence={[
+          'One',
+          800,
+          () => setTextColor('aqua'),
+          'One Two',
+          800,
+          () => setTextColor('deeppink'),
+          'One Two Three',
+          1000,
+          () => setTextColor('darkkhaki'),
+          '',
+        ]}
+        repeat={Infinity}
+      />
+    </div>
+    <button
+      onClick={() => {
+        const items = [
+          'blue',
+          'green',
+          'purple',
+          'pink',
+          'brown',
+          'darkmagenta',
+          'darksalmon',
+          'dodgerblue',
+          'firebrick',
+          'darkviolet',
+        ];
+        setTextColor(items[Math.floor(Math.random() * items.length)]); // set random color
+      }}
+    >
+      Change Color
+    </button>
+  </>
+);
+```
