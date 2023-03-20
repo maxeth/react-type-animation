@@ -29,7 +29,8 @@ const config: DocsThemeConfig = {
   project: {
     link: 'https://github.com/maxeth/react-type-animation',
   },
-  docsRepositoryBase: 'https://github.com/maxeth/react-type-animation/example',
+  docsRepositoryBase:
+    'https://github.com/maxeth/react-type-animation/tree/master/example',
   feedback: {
     useLink: () => 'https://github.com/maxeth/react-type-animation/issues/new',
     content: () => <span>Report bugs & provide feedback →</span>,
