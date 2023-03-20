@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 const config: DocsThemeConfig = {
   // logo: <TypeAnimation repeat={0} sequence={['react-type-animation']} />,
-
+  darkMode: false,
   logo: (
     <TypeAnimation
       className="bg-blue-200 dark:bg-blue-600 px-2"
@@ -31,7 +31,7 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: 'https://github.com/maxeth/react-type-animation/example',
   feedback: {
-    useLink: () => 'https://github.com/maxeth/react-type-animation/issues/news',
+    useLink: () => 'https://github.com/maxeth/react-type-animation/issues/new',
     content: () => <span>Report bugs & provide feedback →</span>,
   },
 
