@@ -4,8 +4,6 @@ import { TypeAnimation } from 'react-type-animation';
 import { useRouter } from 'next/router';
 
 const config: DocsThemeConfig = {
-  // logo: <TypeAnimation repeat={0} sequence={['react-type-animation']} />,
-  darkMode: false,
   logo: (
     <TypeAnimation
       className="bg-blue-200 dark:bg-blue-600 px-2"
