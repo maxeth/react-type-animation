@@ -121,10 +121,11 @@ export function StateManipulationColorExample() {
   return (
     <>
       <div
-        className="w-full bg-blue-400 bg-opacity-10 p-3 rounded-lg h-[45px] text-[1.75rem]"
+        className="w-full bg-blue-400 bg-opacity-10 p-3 rounded-lg text-[1.75rem]"
         style={{
           color: textColor,
           fontSize: '35px',
+          display: 'inline-block',
         }}
       >
         <RawTypeAnimation
@@ -252,11 +253,11 @@ export function CustomSpeedExample() {
         />
       </div>
       <div className="text-gray-500">
-        {"speed={type: 'keyStrokeDelayInMs', value: 250}"}
+        {"speed={{type: 'keyStrokeDelayInMs', value: 250}}"}
       </div>
       <div className="font-bold  text-lg mt-5">
         <TypeAnimation
-          sequence={['Delete faster or slower by setting speed.', 1000, '']}
+          sequence={['Type faster or slower by setting speed.', 1000, '']}
           deletionSpeed={90}
           repeat={Infinity}
         />

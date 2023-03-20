@@ -184,7 +184,7 @@ It's possible to manipulate the animation styles in order to, for example, **sto
 
 <ForwardRefExample />
 
-```tsx {1,10,12,14,21-22,27,34,36,43-53}
+```tsx {1,10,12,14,21-22,26,33,35,42-52}
 const ref = React.createRef<HTMLSpanElement>(); // HTMLSpanElement because 'span' is the default wrapper element of the <TypeAnimation/> component
 
 const CURSOR_CLASS_NAME = 'custom-type-animation-cursor';
@@ -209,7 +209,6 @@ return (
       cursor={false} // omit the default css typing animation class, otherwise we won't be able to manipulate it manually
       style={{
         fontSize: '1.75rem',
-        height: '45px',
       }}
       className={CURSOR_CLASS_NAME} // pass custom cursor className that will be manipulated (defaults below)
       sequence={[
