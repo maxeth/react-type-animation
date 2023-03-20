@@ -58,8 +58,7 @@ async function perform(
     let slicePoint = 0;
     // Find the end-state of the deletion sequence which is either the beginning of a new, longer string, or the empty string
     for (let i = 1; i < edits.length; i++) {
-      const prev = edits[i - 1];
-      const curr = edits[i];
+      const [prev, curr] = [edits[i - 1], edits[i]];
       if (curr.length > prev.length || curr === '') {
         slicePoint = i;
         break;
