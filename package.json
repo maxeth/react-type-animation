@@ -1,6 +1,6 @@
 {
   "name": "react-type-animation",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "Customizable React typing animation component based on typical.",
   "author": "max37",
   "license": "MIT",
@@ -70,7 +70,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-url": "^1.4.0",
     "tslib": "^2.4.0",
-    "typescript": "^4.8.4",
+    "typescript": "^4.9.4",
     "typescript-plugin-css-modules": "^3.4.0"
   }
 }
