@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import TypeAnimation from '../TypeAnimation';
-import { TypeAnimation as RawTypeAnimation } from 'react-type-animation-local';
+import { TypeAnimation as RawTypeAnimation } from 'react-type-animation';
 
 export function CallbackExample() {
   const [typingStatus, setTypingStatus] = useState('Initializing');

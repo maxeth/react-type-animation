@@ -1,6 +1,6 @@
 import React from 'react';
 import { DocsThemeConfig } from 'nextra-theme-docs';
-import { TypeAnimation } from 'react-type-animation-local';
+import { TypeAnimation } from 'react-type-animation';
 import { useRouter } from 'next/router';
 
 const config: DocsThemeConfig = {

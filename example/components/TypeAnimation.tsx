@@ -1,4 +1,4 @@
-import { TypeAnimation } from 'react-type-animation-local';
+import { TypeAnimation } from 'react-type-animation';
 
 export default function _TypeAnimation(props: any) {
   return (
