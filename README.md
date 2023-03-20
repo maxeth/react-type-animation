@@ -18,7 +18,7 @@ Requires a `react` and `react-dom` version of at least 15.0.0.
 
 ## Live Demo
 
-A live demo of the animation can be found at: [https://react-type-animation.netlify.app/examples](https://react-type-animation.netlify.app/examples);
+A live demo of the animation can be found at: [https://react-type-animation.netlify.app/examples](https://react-type-animation.netlify.app/examples).
 
 ## Usage
 
@@ -49,11 +49,11 @@ const ExampleComponent = () => {
 
 ## Documentation
 
-The docs with props, options and common problem solutions can be found at [https://react-type-animation.netlify.app/](https://react-type-animation.netlify.app/).
+The docs with props, options and common problem solutions can be found at: [https://react-type-animation.netlify.app/](https://react-type-animation.netlify.app/).
 
 ## Migrating to v3
 
-- The default wrapper is now `<span>` instead of `<div>`: **To migrate**, add a `display: inline-block/block` or `wrapper="div"` to all `<TypeAnimation/>` occurances with unspecified wrapper.
+The default wrapper is now `<span>` instead of `<div>`: **To migrate**, add a `display: inline-block/block` or `wrapper="div"` to all `<TypeAnimation/>` occurances with unspecified wrapper.
 
 ## Usage Notes
 
