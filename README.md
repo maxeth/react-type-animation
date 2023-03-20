@@ -1,4 +1,4 @@
-# # react-type-animation
+# react-type-animation
 
 A customizable React typing animation component.
 
