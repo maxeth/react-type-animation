@@ -225,9 +225,14 @@ export function ForwardRefExample() {
             'One Two',
             800,
             'One Two Three',
-            () => showCursorAnimation(false),
+            // () => showCursorAnimation(false),
+            (el) => {
+              el.classList.remove(CURSOR_CLASS_NAME);
+            },
             2000,
-            () => showCursorAnimation(true),
+            (el) => {
+              el.classList.add(CURSOR_CLASS_NAME);
+            },
             '',
           ]}
           repeat={Infinity}
