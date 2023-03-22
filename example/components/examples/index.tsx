@@ -61,6 +61,29 @@ export function LandingPageExample() {
     </div>
   );
 }
+export function LandingPagePreTypedExample() {
+  return (
+    <span
+      style={{ fontSize: '2em' }}
+      className="w-full font-bold block bg-blue-400 bg-opacity-10 p-3 rounded-lg"
+    >
+      <span>We produce food for</span>{' '}
+      <RawTypeAnimation
+        sequence={[
+          'Mice',
+          1000,
+          'Hamsters',
+          1000,
+          'Guinea Pigs',
+          1000,
+          'Chinchillas',
+          1000,
+        ]}
+        repeat={Infinity}
+      />
+    </span>
+  );
+}
 
 export function ContinuationExample() {
   return (

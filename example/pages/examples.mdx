@@ -3,6 +3,7 @@ import {
   ContinuationExample,
   StateManipulationColorExample,
   LandingPageExample,
+  LandingPagePreTypedExample,
   ReplacementExample,
   CustomSpeedExample,
   MultipleLinesExample,
@@ -39,6 +40,29 @@ Include the initial text in every string, and the **static part will only be typ
   style={{ fontSize: '2em' }}
   repeat={Infinity}
 />
+```
+
+<br />
+
+<LandingPagePreTypedExample />
+
+```tsx copy
+<span style={{ fontSize: '2em' }}>
+  <span>We produce food for</span>{' '} // <--- will be rendered without animation
+  <TypeAnimation
+    sequence={[
+      'Mice',
+      1000,
+      'Hamsters',
+      1000,
+      'Guinea Pigs',
+      1000,
+      'Chinchillas',
+      1000,
+    ]}
+    repeat={Infinity}
+  />
+</span>
 ```
 
 ---
