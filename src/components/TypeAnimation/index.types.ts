@@ -12,7 +12,7 @@ interface Props {
   wrapper?: Wrapper;
   cursor?: boolean;
   speed?: Speed | GranularSpeed;
-  deletionSpeed?: number | GranularSpeed;
+  deletionSpeed?: Speed | GranularSpeed;
   omitDeletionAnimation?: boolean;
 }
 
