@@ -9,7 +9,7 @@ import { Callout, Tab, Tabs, Steps } from 'nextra-theme-docs';
   options={[
     [
       'sequence',
-      'Array<number | string | () => void>',
+      'Array<number | string | (() => void | Promise<void>)>',
       'Animation sequence consisting of: [TEXT, DELAY-IN-MS, CALLBACK-FUNC]',
       "['One', 1000, 'Two', () => console.log('done typing!')]",
       '-',
