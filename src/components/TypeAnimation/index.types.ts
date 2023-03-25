@@ -1,8 +1,6 @@
 import { HtmlHTMLAttributes } from 'react';
 
-export interface TypeAnimationProps
-  extends Props,
-    HtmlHTMLAttributes<HTMLElement['style']> {
+export interface TypeAnimationProps extends Props {
   ref?: React.Ref<HTMLElementTagNameMap[Wrapper]>;
 }
 
