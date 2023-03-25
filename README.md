@@ -86,6 +86,10 @@ See [https://react-type-animation.netlify.app/options](https://react-type-animat
 
 ---
 
+ <br>
+ <br>
+ <br>
+
 [npm](https://www.npmjs.com/package/react-type-animation) / [github](https://github.com/maxeth/react-type-animation/)
 Credits: [typical](https://github.com/camwiegert/typical)
 Shoutouts/Supporters: [blockig](https://www.blockig.com/)
