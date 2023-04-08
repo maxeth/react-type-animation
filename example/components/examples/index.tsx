@@ -128,7 +128,7 @@ export function MultipleLinesExample() {
         sequence={[
           `Line one\nLine Two\nLine Three\nLine Four\nLine Five
 
-Line Eight`,
+Line Seven`,
           1000,
           '',
         ]}
