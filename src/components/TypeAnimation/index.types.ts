@@ -1,5 +1,3 @@
-import { HtmlHTMLAttributes } from 'react';
-
 export interface TypeAnimationProps extends Props {
   ref?: React.Ref<HTMLElementTagNameMap[Wrapper]>;
 }
@@ -12,6 +10,7 @@ interface Props {
   speed?: Speed | GranularSpeed;
   deletionSpeed?: Speed | GranularSpeed;
   omitDeletionAnimation?: boolean;
+  preRenderFirstString?: boolean;
 }
 
 export type GranularSpeed = {

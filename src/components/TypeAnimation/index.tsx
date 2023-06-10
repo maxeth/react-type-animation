@@ -18,12 +18,16 @@ const TypeAnimation = forwardRef<
       speed = DEFAULT_SPEED,
       deletionSpeed,
       omitDeletionAnimation = false,
+      preRenderFirstString = false,
       wrapper = 'span',
       cursor = true,
-      style
+      style,
+      ...rest
     },
     ref
   ) => {
+    const { 'aria-label': ariaLabel, 'aria-hidden': ariaHidden } = rest;
+
     if (!deletionSpeed) {
       deletionSpeed = speed;
     }
@@ -91,7 +95,32 @@ const TypeAnimation = forwardRef<
     });
 
     const WrapperEl = wrapper;
-    return <WrapperEl style={style} className={finalClassName} ref={typeRef} />;
+
+    const preRenderedChildren = preRenderFirstString
+      ? (sequence.find(el => typeof el === 'string') as string | undefined) ||
+        ''
+      : null;
+
+    return (
+      <WrapperEl
+        aria-hidden={ariaHidden}
+        aria-label={ariaLabel}
+        style={style}
+        className={finalClassName}
+        children={
+          ariaLabel ? (
+            <span
+              aria-hidden="true"
+              ref={typeRef}
+              children={preRenderedChildren}
+            />
+          ) : (
+            preRenderedChildren
+          )
+        }
+        ref={ariaLabel ? undefined : typeRef}
+      />
+    );
   }
 );
 
