@@ -1,6 +1,7 @@
 {
   "index": "Get Started",
   "examples": "Examples",
-  "options": "Options",
-  "wrapper-css": "Wrapper & CSS tips"
+  "options": "Options / Props",
+  "wrapper-css": "Wrapper & CSS tips",
+  "accessibility": "Accessibility"
 }

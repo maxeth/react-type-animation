@@ -15,7 +15,9 @@ import { Callout, Tabs, Tab } from 'nextra-theme-docs';
 
 ---
 
-## Landing Page Animation
+## Landing Page Animations
+
+### Dynamic
 
 Include the initial text in every string, and the **static part will only be typed out once**.
 
@@ -26,7 +28,7 @@ Include the initial text in every string, and the **static part will only be typ
 ```tsx copy
 <TypeAnimation
   sequence={[
-    // Same String at the start will only be typed once, initially
+    // Same substring at the start will only be typed once, initially
     'We produce food for Mice',
     1000,
     'We produce food for Hamsters',
@@ -42,27 +44,34 @@ Include the initial text in every string, and the **static part will only be typ
 />
 ```
 
+### Initially Pre-rendered
+
+By using the `preRenderFirstString` prop, you can initially (pre-)render the very first string of your sequence. When used with SSR (Next.js or similar), the initial string will be included in the static HTML, which may benefit SEO.
+
 <br />
 
 <LandingPagePreTypedExample />
 
-```tsx copy
-<span style={{ fontSize: '2em' }}>
-  <span>We produce food for</span>{' '} // <--- will be rendered without animation
+```tsx copy {3}
+<di>
   <TypeAnimation
+    preRenderFirstString={true}
     sequence={[
-      'Mice',
+      500,
+      'We produce food for Mice', // initially rendered starting point
       1000,
-      'Hamsters',
+      'We produce food for Hamsters',
       1000,
-      'Guinea Pigs',
+      'We produce food for Guinea Pigs',
       1000,
-      'Chinchillas',
-      1000,
+      'We produce food for Chinchillas',
+      500,
     ]}
+    speed={50}
+    style={{ fontSize: '2em' }}
     repeat={Infinity}
   />
-</span>
+</div>
 ```
 
 ---

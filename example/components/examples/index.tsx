@@ -44,6 +44,7 @@ export function LandingPageExample() {
   return (
     <div className="font-bold text-lg">
       <TypeAnimation
+        aria-label="We produce food for Mice, Hamsters, Guinea Pigs and Chinchillas"
         sequence={[
           'We produce food for Mice',
           1000,
@@ -57,7 +58,7 @@ export function LandingPageExample() {
         speed={50}
         style={{ fontSize: '2em' }}
         repeat={Infinity}
-      />{' '}
+      />
     </div>
   );
 }
@@ -65,22 +66,27 @@ export function LandingPagePreTypedExample() {
   return (
     <span
       style={{ fontSize: '2em' }}
-      className="w-full font-bold block bg-blue-400 bg-opacity-10 p-3 rounded-lg"
+      className="w-full font-bold block  bg-opacity-10 p-3 rounded-lg"
     >
-      <span>We produce food for</span>{' '}
-      <RawTypeAnimation
-        sequence={[
-          'Mice',
-          1000,
-          'Hamsters',
-          1000,
-          'Guinea Pigs',
-          1000,
-          'Chinchillas',
-          1000,
-        ]}
-        repeat={Infinity}
-      />
+      <div className="font-bold text-lg" id="@@@">
+        <TypeAnimation
+          preRenderFirstString={true}
+          sequence={[
+            500,
+            'We produce food for Mice',
+            1000,
+            'We produce food for Hamsters',
+            1000,
+            'We produce food for Guinea Pigs',
+            1000,
+            'We produce food for Chinchillas',
+            500,
+          ]}
+          speed={50}
+          style={{ fontSize: '2em' }}
+          repeat={Infinity}
+        />
+      </div>
     </span>
   );
 }

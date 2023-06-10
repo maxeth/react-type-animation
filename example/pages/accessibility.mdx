@@ -1,0 +1,88 @@
+import { Callout } from 'nextra-theme-docs';
+
+# Accessibility
+
+Because the typing animation _A)_ delays and _B)_ constantly manipulates the written text, it is not only bothersome but sometimes even **impossible for screen readers** to capture the entire text at once.
+
+If your type animation component includes **actual text ("content")** or conveys an important message that is not purely decorative, you should make your typewriter animation accessible to screen readers.
+
+## 1st Approach: visually-hidden class
+
+The perhaps best approach to make the typewriter animation accessible is
+
+1. Additionally rendering the conveyed message of the `<TypeAnimation />` in a separate wrapper with a _visually-hidden_ class that only hides the content for sighted users
+2. and setting `aria-hidden="true"` on the `<TypeAnimation />` to remove it from the a11y tree:
+
+```tsx {2-16,18}
+<span style={{ position: 'relative' }}>
+  <span
+    style={{
+      clip: 'rect(1px, 1px, 1px, 1px)',
+      clipPath: 'inset(50%)',
+      height: '1px',
+      width: '1px',
+      margin: '-1px',
+      overflow: 'hidden',
+      padding: '0',
+      position: 'absolute',
+    }}
+  >
+    {/* The most important content of the typewriter animation: Hidden from sighted viewers but (in most cases) accessible to screen readers */}
+    We produce food for Mice, Hamsters, Guinea Pigs and Chinchillas
+  </span>
+  <TypeAnimation
+    aria-hidden="true"
+    sequence={[
+      'We produce food for Mice',
+      1000,
+      'We produce food for Hamsters',
+      1000,
+      'We produce food for Guinea Pigs',
+      1000,
+      'We produce food for Chinchillas',
+      1000,
+    ]}
+    wrapper="span"
+  />
+</span>
+```
+
+## 2nd Approach: aria-label
+
+You can also add an `aria-label` directly on the `<TypeAnimation />` component to convey the most important contents of the typewriter animation:
+
+```tsx {2}
+<TypeAnimation
+  aria-label="We produce food for Mice, Hamsters, Guinea Pigs and Chinchillas"
+  sequence={[
+    // Same String at the start will only be typed once, initially
+    'We produce food for Mice',
+    1000,
+    'We produce food for Hamsters',
+    1000,
+    'We produce food for Guinea Pigs',
+    1000,
+    'We produce food for Chinchillas',
+    1000,
+  ]}
+  wrapper="div"
+  repeat={Infinity}
+/>
+```
+
+By applying an `aria-label`, the dynamically typed contents of your sequence will automatically be wrapped in a `<span/>` with `aria-hidden="true"` and removed from the accessibility tree:
+
+```html {aria-hidden="true"}
+<div
+  aria-label="We produce food for Mice, Hamsters, Guinea Pigs and Chinchillas"
+>
+  <span aria-hidden="true">We pro</span>
+</div>
+```
+
+<Callout type="warning" emoji="⚠️">
+  Note: `aria-label` should generally only be used on interactive elements,
+  which may make this approach not ideal. Certain screen readers may even
+  disregard this aria-label entirely as it is applied to a non-interactive
+  wrapper element.
+</Callout>

@@ -18,9 +18,11 @@ Requires a `react` and `react-dom` version of at least 15.0.0.
 
 ## Live Demo
 
-A live demo of the animation can be found at: [https://react-type-animation.netlify.app/examples](https://react-type-animation.netlify.app/examples).
+A live demo and usage examples of the animation can be found at [https://react-type-animation.netlify.app/examples](https://react-type-animation.netlify.app/examples).
 
 ## Usage
+
+A common typewriter animation for a landing page would look like this:
 
 ```jsx
 import { TypeAnimation } from 'react-type-animation';
@@ -29,19 +31,20 @@ const ExampleComponent = () => {
   return (
     <TypeAnimation
       sequence={[
-        'One', // Types 'One'
-        1000, // Waits 1s
-        'Two', // Deletes 'One' and types 'Two'
-        2000, // Waits 2s
-        'Two Three', // Types 'Three' without deleting 'Two'
-        () => {
-          console.log('Sequence completed'); // Place optional callbacks anywhere in the array
-        }
+        // Same substring at the start will only be typed out once, initially
+        'We produce food for Mice',
+        1000, // wait 1s before replacing "Mice" with "Hamsters"
+        'We produce food for Hamsters',
+        1000,
+        'We produce food for Guinea Pigs',
+        1000,
+        'We produce food for Chinchillas',
+        1000
       ]}
       wrapper="span"
-      cursor={true}
-      repeat={Infinity}
+      speed={50}
       style={{ fontSize: '2em', display: 'inline-block' }}
+      repeat={Infinity}
     />
   );
 };
@@ -71,18 +74,19 @@ Hence, whenever you make changes to the TypeAnimation component, you unfortunate
 
 See [https://react-type-animation.netlify.app/options](https://react-type-animation.netlify.app/options) for more details.
 
-| Prop                    | Required | Type                                                                 | Example                                           | Description                                              | Default |
-| ----------------------- | -------- | -------------------------------------------------------------------- | ------------------------------------------------- | -------------------------------------------------------- | ------- |
-| `sequence`              | yes      | Array<number &#124; string &#124; (() => void &#124; Promise<void>)> | `['One', 1000, 'Two', () => console.log("done")]` | Animation sequence: [TEXT, DELAY-MS, CALLBACK]           | `-`     |
-| `wrapper`               | no       | string                                                               | `p`,`h2`,`div`, `strong`                          | HTML element tag that wraps the typing animation         | `span`  |
-| `speed`                 | no       | 1,2,..,99 &#124; {type: "keyStrokeDelayInMs", value: number}         | `45`, `{type: "keyStrokeDelayInMs", value: 100}`  | Speed for the writing of the animation                   | `40`    |
-| `deletionSpeed`         | no       | 1,2,..,99 &#124; {type: "keyStrokeDelayInMs", value: number}         | `45`, `{type: "keyStrokeDelayInMs", value: 100}`  | Speed for deleting of the animation                      | `speed` |
-| `omitDeletionAnimation` | no       | boolean                                                              | `false`, `true`                                   | If true, deletions will be instant and without animation | `false` |
-| `repeat`                | no       | number                                                               | `0`, `3`, `Infinity`                              | Amount of animation repetitions                          | `0`     |
-| `cursor`                | no       | boolean                                                              | `false`, `true`                                   | Display default blinking cursor css-animation            | `true`  |
-| `className`             | no       | string                                                               | `custom-class-name`                               | HTML class name applied to the wrapper to style the text | `-`     |
-| `style`                 | no       | object                                                               | `{fontSize: '2em'}`                               | JSX inline style object                                  | `-`     |
-| `ref`                   | no       | HTMLElement &#124; null                                              | `-`                                               | `-`                                                      | `-`     |
+| Prop                    | Required | Type                                                                 | Example                                           | Description                                                                                  | Default |
+| ----------------------- | -------- | -------------------------------------------------------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------- |
+| `sequence`              | yes      | Array<number &#124; string &#124; (() => void &#124; Promise<void>)> | `['One', 1000, 'Two', () => console.log("done")]` | Animation sequence: [TEXT, DELAY-MS, CALLBACK]                                               | `-`     |
+| `wrapper`               | no       | string                                                               | `p`,`h2`,`div`, `strong`                          | HTML element tag that wraps the typing animation                                             | `span`  |
+| `speed`                 | no       | 1,2,..,99 &#124; {type: "keyStrokeDelayInMs", value: number}         | `45`, `{type: "keyStrokeDelayInMs", value: 100}`  | Speed for the writing of the animation                                                       | `40`    |
+| `deletionSpeed`         | no       | 1,2,..,99 &#124; {type: "keyStrokeDelayInMs", value: number}         | `45`, `{type: "keyStrokeDelayInMs", value: 100}`  | Speed for deleting of the animation                                                          | `speed` |
+| `omitDeletionAnimation` | no       | boolean                                                              | `false`, `true`                                   | If true, deletions will be instant and without animation                                     | `false` |
+| `repeat`                | no       | number                                                               | `0`, `3`, `Infinity`                              | Amount of animation repetitions                                                              | `0`     |
+| `cursor`                | no       | boolean                                                              | `false`, `true`                                   | Display default blinking cursor css-animation                                                | `true`  |
+| `preRenderFirstString`  | no       | boolean                                                              | `false`, `true`                                   | If true, the first string of your sequence will not be animated and initially (pre-)rendered | `true`  |
+| `className`             | no       | string                                                               | `custom-class-name`                               | HTML class name applied to the wrapper to style the text                                     | `-`     |
+| `style`                 | no       | object                                                               | `{fontSize: '2em'}`                               | JSX inline style object                                                                      | `-`     |
+| `ref`                   | no       | HTMLElement &#124; null                                              | `-`                                               | `-`                                                                                          | `-`     |
 
 ---
 
