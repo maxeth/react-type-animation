@@ -19,7 +19,7 @@ export type GranularSpeed = {
   value: number;
 };
 
-type Speed =
+export type Speed =
   | 1
   | 2
   | 3
@@ -134,8 +134,8 @@ export type Wrapper =
   | 'h6'
   | 'b';
 
-type Sequence = Array<SequenceElement>;
-type SequenceElement =
+export type Sequence = Array<SequenceElement>;
+export type SequenceElement =
   | string
   | number
   | ((element: HTMLElement | null) => void | Promise<void>);
