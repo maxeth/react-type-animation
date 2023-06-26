@@ -6,7 +6,6 @@ const OP_CODE_WRITING = 'WRITING';
 
 export async function type(
   node: HTMLElementTagNameMap[Wrapper],
-  splitter: StringSplitter,
   speed: number,
   deletionSpeed: number,
   omitDeletionAnimation: boolean,
@@ -15,14 +14,14 @@ export async function type(
   for (const arg of args) {
     switch (typeof arg) {
       case 'string':
-        await edit(node, splitter, arg, speed, deletionSpeed, omitDeletionAnimation);
+        await edit(node, arg, speed, deletionSpeed, omitDeletionAnimation);
         break;
       case 'number':
         await wait(arg);
         break;
       case 'function':
         // when typeloop is passed from the TypeAnimation component, this causes an infinite, recursive call-loop here
-        await arg(node, splitter, speed, deletionSpeed, omitDeletionAnimation, ...args);
+        await arg(node, speed, deletionSpeed, omitDeletionAnimation, ...args);
         break;
       default:
         await arg;
@@ -32,7 +31,6 @@ export async function type(
 
 async function edit(
   node: HTMLElementTagNameMap[Wrapper],
-  splitter: StringSplitter,
   text: string,
   speed: number,
   deletionSpeed: number,
@@ -43,7 +41,7 @@ async function edit(
   const overlap = getOverlap(nodeContent, text);
   await perform(
     node,
-    [...deleter(nodeContent, splitter, overlap), ...writer(text, splitter, overlap)],
+    [...deleter(nodeContent, overlap), ...writer(text, overlap)],
     speed,
     deletionSpeed,
     omitDeletionAnimation
@@ -101,7 +99,7 @@ function* editor(edits: ReadonlyArray<string>) {
 }
 
 function* writer(text: string, splitter: StringSplitter, startIndex = 0) {
-  const splitText = splitter(text);
+  const splitText = [...text];
   const endIndex = splitText.length;
 
   while (startIndex < endIndex) {
@@ -110,7 +108,7 @@ function* writer(text: string, splitter: StringSplitter, startIndex = 0) {
 }
 
 function* deleter(text: string, splitter: StringSplitter, startIndex = 0) {
-  const splitText = splitter(text);
+  const splitText = [...text];
   let endIndex = splitText.length;
 
   while (endIndex > startIndex) {
