@@ -20,7 +20,6 @@ const TypeAnimation = forwardRef<
       omitDeletionAnimation = false,
       preRenderFirstString = false,
       wrapper = 'span',
-      splitter = (text: string): ReadonlyArray<string> => [...text],
       cursor = true,
       style,
       ...rest
@@ -87,7 +86,6 @@ const TypeAnimation = forwardRef<
 
       type(
         typeRef.current,
-        splitter,
         keyStrokeDelayTyping,
         keyStrokeDelayDeleting,
         omitDeletionAnimation,
@@ -103,8 +101,7 @@ const TypeAnimation = forwardRef<
     const WrapperEl = wrapper;
 
     const preRenderedChildren = preRenderFirstString
-      ? (sequence.find(el => typeof el === 'string') as string | undefined) ||
-        ''
+      ? ((sequence.find(el => typeof el === 'string') || '') as string)
       : null;
 
     return (
