@@ -25,7 +25,7 @@ const TypeAnimation = forwardRef<
       style,
       ...rest
     },
-    ref: React.ForwardedRef<HTMLElementTagNameMap[Wrapper]>,
+    ref: React.ForwardedRef<HTMLElementTagNameMap[Wrapper]>
   ) => {
     const { 'aria-label': ariaLabel, 'aria-hidden': ariaHidden } = rest;
 
@@ -91,10 +91,11 @@ const TypeAnimation = forwardRef<
         keyStrokeDelayTyping,
         keyStrokeDelayDeleting,
         omitDeletionAnimation,
-        ...restArgs,
+        ...restArgs
       );
 
       return () => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         typeRef.current;
       };
     });
@@ -123,6 +124,7 @@ const TypeAnimation = forwardRef<
             preRenderedChildren
           )
         }
+        // @ts-ignore
         ref={ariaLabel ? undefined : typeRef}
       />
     );

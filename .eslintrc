@@ -12,6 +12,7 @@
     "no-shadow": "warn",
     "jsx-a11y/anchor-is-valid": "off",
     "space-before-function-paren": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     "react/jsx-boolean-value": "off",
     "semi": "off",
     "react/prop-types": "off"

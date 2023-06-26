@@ -15,7 +15,7 @@ export async function type(
   for (const arg of args) {
     switch (typeof arg) {
       case 'string':
-        await nodeEditor(node, splitter, arg, speed, deletionSpeed, omitDeletionAnimation);
+        await edit(node, splitter, arg, speed, deletionSpeed, omitDeletionAnimation);
         break;
       case 'number':
         await wait(arg);
@@ -30,7 +30,7 @@ export async function type(
   }
 }
 
-async function nodeEditor(
+async function edit(
   node: HTMLElementTagNameMap[Wrapper],
   splitter: StringSplitter,
   text: string,
@@ -85,14 +85,14 @@ async function perform(
 }
 
 function* editor(edits: ReadonlyArray<string>) {
-  for (const edit of edits) {
+  for (const snippet of edits) {
     yield {
-      op: (node: HTMLElementTagNameMap[Wrapper]) => requestAnimationFrame(() => (node.textContent = edit)),
+      op: (node: HTMLElementTagNameMap[Wrapper]) => requestAnimationFrame(() => (node.textContent = snippet)),
 
       opCode: (node: HTMLElementTagNameMap[Wrapper]) => {
         const nodeContent = node.textContent || '';
 
-        return edit === '' || nodeContent.length > edit.length
+        return snippet === '' || nodeContent.length > snippet.length
           ? OP_CODE_DELETION
           : OP_CODE_WRITING;
       }
