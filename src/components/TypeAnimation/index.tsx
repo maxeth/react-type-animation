@@ -3,7 +3,7 @@ import { useEffectOnce } from '../../hooks/useEffectOnce';
 import useForwardRef from '../../hooks/useForwardRef';
 import { type, type as typeloop } from '../../typical';
 import styles from './index.module.css';
-import { GranularSpeed, TypeAnimationProps, Wrapper } from './index.types';
+import { TypeAnimationProps, Wrapper } from './index.types';
 
 const DEFAULT_SPEED = 40;
 const TypeAnimation = forwardRef<
@@ -20,11 +20,12 @@ const TypeAnimation = forwardRef<
       omitDeletionAnimation = false,
       preRenderFirstString = false,
       wrapper = 'span',
+      splitter = (text: string): ReadonlyArray<string> => [...text],
       cursor = true,
       style,
       ...rest
     },
-    ref
+    ref: React.ForwardedRef<HTMLElementTagNameMap[Wrapper]>,
   ) => {
     const { 'aria-label': ariaLabel, 'aria-hidden': ariaHidden } = rest;
 
@@ -39,28 +40,30 @@ const TypeAnimation = forwardRef<
         case 'number':
           normalizedSpeeds[i] = Math.abs(s - 100);
           break;
-        case 'object':
-          const { type, value } = s as GranularSpeed;
+        case 'object': {
+          const { type: speedType, value } = s;
+
           if (typeof value !== 'number') {
             break;
             // throw new Error("Expected key 'value' of type number.");
           }
-          switch (type) {
+          switch (speedType) {
             case 'keyStrokeDelayInMs': {
               normalizedSpeeds[i] = value;
               break;
             }
           }
           break;
+        }
       }
     });
 
     const keyStrokeDelayTyping = normalizedSpeeds[0];
     const keyStrokeDelayDeleting = normalizedSpeeds[1];
 
-    const typeRef = useForwardRef<any>(ref);
+    const typeRef = useForwardRef<HTMLElementTagNameMap[Wrapper]>(ref);
 
-    let baseStyle = styles.type;
+    const baseStyle = styles.type;
     let finalClassName;
     if (className) {
       finalClassName = `${cursor ? baseStyle + ' ' : ''}${className}`;
@@ -70,7 +73,7 @@ const TypeAnimation = forwardRef<
 
     useEffectOnce(() => {
       let seq = sequence;
-      let tl;
+      let tl: typeof typeloop | undefined;
 
       if (repeat === Infinity) {
         tl = typeloop;
@@ -80,13 +83,15 @@ const TypeAnimation = forwardRef<
           .flat();
       }
 
+      const restArgs = tl ? [...seq, tl] : [...seq];
+
       type(
         typeRef.current,
+        splitter,
         keyStrokeDelayTyping,
         keyStrokeDelayDeleting,
         omitDeletionAnimation,
-        ...seq,
-        tl
+        ...restArgs,
       );
 
       return () => {

@@ -1,23 +1,28 @@
+import type { SequenceElement, StringSplitter } from './components/TypeAnimation/index.types';
+import { Wrapper } from './components/TypeAnimation/index.types';
+
 const OP_CODE_DELETION = 'DELETE';
 const OP_CODE_WRITING = 'WRITING';
 
 export async function type(
-  node: any,
+  node: HTMLElementTagNameMap[Wrapper],
+  splitter: StringSplitter,
   speed: number,
   deletionSpeed: number,
   omitDeletionAnimation: boolean,
-  ...args: any
+  ...args: ReadonlyArray<SequenceElement | typeof type>
 ) {
   for (const arg of args) {
     switch (typeof arg) {
       case 'string':
-        await edit(node, arg, speed, deletionSpeed, omitDeletionAnimation);
+        await nodeEditor(node, splitter, arg, speed, deletionSpeed, omitDeletionAnimation);
         break;
       case 'number':
         await wait(arg);
         break;
       case 'function':
-        await arg(node, speed, deletionSpeed, omitDeletionAnimation, ...args); // when typeloop is passed from the TypeAnimation component, this causes an infinite, recursive call-loop here
+        // when typeloop is passed from the TypeAnimation component, this causes an infinite, recursive call-loop here
+        await arg(node, splitter, speed, deletionSpeed, omitDeletionAnimation, ...args);
         break;
       default:
         await arg;
@@ -25,17 +30,20 @@ export async function type(
   }
 }
 
-async function edit(
-  node: any,
-  text: any,
+async function nodeEditor(
+  node: HTMLElementTagNameMap[Wrapper],
+  splitter: StringSplitter,
+  text: string,
   speed: number,
   deletionSpeed: number,
   omitDeletionAnimation: boolean
 ) {
-  const overlap = getOverlap(node.textContent, text);
+  const nodeContent = node.textContent || '';
+
+  const overlap = getOverlap(nodeContent, text);
   await perform(
     node,
-    [...deleter(node.textContent, overlap), ...writer(text, overlap)],
+    [...deleter(nodeContent, splitter, overlap), ...writer(text, splitter, overlap)],
     speed,
     deletionSpeed,
     omitDeletionAnimation
@@ -47,8 +55,8 @@ async function wait(ms: number) {
 }
 
 async function perform(
-  node: any,
-  edits: any,
+  node: HTMLElementTagNameMap[Wrapper],
+  edits: ReadonlyArray<string>,
   speed: number,
   deletionSpeed: number,
   omitDeletionAnimation: boolean
@@ -76,13 +84,15 @@ async function perform(
   }
 }
 
-function* editor(edits: any) {
+function* editor(edits: ReadonlyArray<string>) {
   for (const edit of edits) {
     yield {
-      op: (node: any) => requestAnimationFrame(() => (node.textContent = edit)),
+      op: (node: HTMLElementTagNameMap[Wrapper]) => requestAnimationFrame(() => (node.textContent = edit)),
 
-      opCode: (node: any) => {
-        return edit === '' || node.textContent.length > edit.length
+      opCode: (node: HTMLElementTagNameMap[Wrapper]) => {
+        const nodeContent = node.textContent || '';
+
+        return edit === '' || nodeContent.length > edit.length
           ? OP_CODE_DELETION
           : OP_CODE_WRITING;
       }
@@ -90,18 +100,24 @@ function* editor(edits: any) {
   }
 }
 
-function* writer([...text], startIndex = 0, endIndex = text.length) {
+function* writer(text: string, splitter: StringSplitter, startIndex = 0) {
+  const splitText = splitter(text);
+  const endIndex = splitText.length;
+
   while (startIndex < endIndex) {
-    yield text.slice(0, ++startIndex).join('');
+    yield splitText.slice(0, ++startIndex).join('');
   }
 }
 
-function* deleter([...text], startIndex = 0, endIndex = text.length) {
+function* deleter(text: string, splitter: StringSplitter, startIndex = 0) {
+  const splitText = splitter(text);
+  let endIndex = splitText.length;
+
   while (endIndex > startIndex) {
-    yield text.slice(0, --endIndex).join('');
+    yield splitText.slice(0, --endIndex).join('');
   }
 }
 
-function getOverlap(start: any, [...end]) {
+function getOverlap(start: string, [...end]: string) {
   return [...start, NaN].findIndex((char, i) => end[i] !== char);
 }
