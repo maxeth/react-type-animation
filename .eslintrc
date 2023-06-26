@@ -1,6 +1,7 @@
 {
-  "parser": "babel-eslint",
-  "extends": "react-app",
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "react-app"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "env": {
     "es6": true
   },
