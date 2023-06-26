@@ -101,8 +101,7 @@ const TypeAnimation = forwardRef<
     const WrapperEl = wrapper;
 
     const preRenderedChildren = preRenderFirstString
-      ? (sequence.find(el => typeof el === 'string') as string | undefined) ||
-        ''
+      ? ((sequence.find(el => typeof el === 'string') || '') as string)
       : null;
 
     return (

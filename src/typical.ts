@@ -1,4 +1,4 @@
-import type { SequenceElement, StringSplitter } from './components/TypeAnimation/index.types';
+import type { SequenceElement } from './components/TypeAnimation/index.types';
 import { Wrapper } from './components/TypeAnimation/index.types';
 
 const OP_CODE_DELETION = 'DELETE';
@@ -98,7 +98,7 @@ function* editor(edits: ReadonlyArray<string>) {
   }
 }
 
-function* writer(text: string, splitter: StringSplitter, startIndex = 0) {
+function* writer(text: string, startIndex = 0) {
   const splitText = [...text];
   const endIndex = splitText.length;
 
@@ -107,7 +107,7 @@ function* writer(text: string, splitter: StringSplitter, startIndex = 0) {
   }
 }
 
-function* deleter(text: string, splitter: StringSplitter, startIndex = 0) {
+function* deleter(text: string, startIndex = 0) {
   const splitText = [...text];
   let endIndex = splitText.length;
 
