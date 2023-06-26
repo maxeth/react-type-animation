@@ -16,7 +16,7 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "npm run build",
-    "react-start": "react-scripts start",
+    "start-linked-example": "npm run build && cd example/ && npm install --save ./../ && npm i && npm run dev && cd ..",
     "start-local-example": "npm run build && cd example/ && npm i && npm run dev && cd .."
   },
   "keywords": [
