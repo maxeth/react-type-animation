@@ -7,6 +7,7 @@ interface Props {
   repeat?: number;
   wrapper?: Wrapper;
   cursor?: boolean;
+  splitter?: StringSplitter;
   speed?: Speed | GranularSpeed;
   deletionSpeed?: Speed | GranularSpeed;
   omitDeletionAnimation?: boolean;
@@ -17,6 +18,8 @@ export type GranularSpeed = {
   type: 'keyStrokeDelayInMs';
   value: number;
 };
+
+export type StringSplitter = (text: string) => ReadonlyArray<string>;
 
 export type Speed =
   | 1
