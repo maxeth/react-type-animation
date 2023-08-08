@@ -54,6 +54,7 @@ You can also add an `aria-label` directly on the `<TypeAnimation />` component t
 ```tsx {2}
 <TypeAnimation
   aria-label="We produce food for Mice, Hamsters, Guinea Pigs and Chinchillas"
+  role="marquee"
   sequence={[
     // Same String at the start will only be typed once, initially
     'We produce food for Mice',
@@ -69,6 +70,8 @@ You can also add an `aria-label` directly on the `<TypeAnimation />` component t
   repeat={Infinity}
 />
 ```
+
+Setting an `aria-label` requires setting a `role` as well. The role [`marquee`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/marquee_role) is probably the most suitable for this situation.
 
 By applying an `aria-label`, the dynamically typed contents of your sequence will automatically be wrapped in a `<span/>` with `aria-hidden="true"` and removed from the accessibility tree:
 

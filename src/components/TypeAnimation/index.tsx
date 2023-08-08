@@ -26,7 +26,7 @@ const TypeAnimation = forwardRef<
     },
     ref: React.ForwardedRef<HTMLElementTagNameMap[Wrapper]>
   ) => {
-    const { 'aria-label': ariaLabel, 'aria-hidden': ariaHidden } = rest;
+    const { 'aria-label': ariaLabel, 'aria-hidden': ariaHidden, role } = rest;
 
     if (!deletionSpeed) {
       deletionSpeed = speed;
@@ -108,6 +108,7 @@ const TypeAnimation = forwardRef<
       <WrapperEl
         aria-hidden={ariaHidden}
         aria-label={ariaLabel}
+        role={role}
         style={style}
         className={finalClassName}
         children={
