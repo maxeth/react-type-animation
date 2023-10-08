@@ -8,7 +8,7 @@ import { TypeAnimationProps, Wrapper } from './index.types';
 const DEFAULT_SPEED = 40;
 const TypeAnimation = forwardRef<
   HTMLElementTagNameMap[Wrapper],
-  TypeAnimationProps & HTMLAttributes<HTMLElementTagNameMap[Wrapper]>
+  TypeAnimationProps
 >(
   (
     {

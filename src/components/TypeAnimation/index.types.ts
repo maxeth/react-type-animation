@@ -1,6 +1,4 @@
-export interface TypeAnimationProps extends Props {
-  ref?: React.Ref<HTMLElementTagNameMap[Wrapper]>;
-}
+import { HTMLAttributes } from 'react';
 
 interface Props {
   sequence: Sequence;
@@ -14,12 +12,41 @@ interface Props {
   preRenderFirstString?: boolean;
 }
 
+export interface TypeAnimationProps
+  extends Props,
+    Pick<
+      HTMLAttributes<HTMLElementTagNameMap[Wrapper]>,
+      'style' | 'aria-label' | 'aria-hidden' | 'role' | 'className'
+    > {
+  ref?: React.Ref<HTMLElementTagNameMap[Wrapper]>;
+}
+
 export type GranularSpeed = {
   type: 'keyStrokeDelayInMs';
   value: number;
 };
 
 export type StringSplitter = (text: string) => ReadonlyArray<string>;
+
+export type Wrapper =
+  | 'p'
+  | 'div'
+  | 'span'
+  | 'strong'
+  | 'a'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'b';
+
+export type Sequence = Array<SequenceElement>;
+export type SequenceElement =
+  | string
+  | number
+  | ((element: HTMLElement | null) => void | Promise<void>);
 
 export type Speed =
   | 1
@@ -121,23 +148,3 @@ export type Speed =
   | 97
   | 98
   | 99;
-
-export type Wrapper =
-  | 'p'
-  | 'div'
-  | 'span'
-  | 'strong'
-  | 'a'
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6'
-  | 'b';
-
-export type Sequence = Array<SequenceElement>;
-export type SequenceElement =
-  | string
-  | number
-  | ((element: HTMLElement | null) => void | Promise<void>);
