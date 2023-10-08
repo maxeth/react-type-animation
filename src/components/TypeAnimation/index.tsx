@@ -8,7 +8,7 @@ import { TypeAnimationProps, Wrapper } from './index.types';
 const DEFAULT_SPEED = 40;
 const TypeAnimation = forwardRef<
   HTMLElementTagNameMap[Wrapper],
-  TypeAnimationProps & HTMLAttributes<HTMLElementTagNameMap[Wrapper]>
+  TypeAnimationProps
 >(
   (
     {
@@ -20,6 +20,7 @@ const TypeAnimation = forwardRef<
       omitDeletionAnimation = false,
       preRenderFirstString = false,
       wrapper = 'span',
+      splitter = (text: string): ReadonlyArray<string> => [...text],
       cursor = true,
       style,
       ...rest
@@ -86,6 +87,7 @@ const TypeAnimation = forwardRef<
 
       type(
         typeRef.current,
+        splitter,
         keyStrokeDelayTyping,
         keyStrokeDelayDeleting,
         omitDeletionAnimation,
