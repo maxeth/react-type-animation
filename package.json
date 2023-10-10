@@ -1,6 +1,6 @@
 {
   "name": "react-type-animation",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Customizable React typing animation component based on typical.",
   "author": "max37",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "animation",
     "typing",
     "typewriter",
+    "react typewriter",
     "typing animation",
     "type animation",
     "react typing animation",
