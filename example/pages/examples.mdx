@@ -7,7 +7,9 @@ import {
   ReplacementExample,
   CustomSpeedExample,
   MultipleLinesExample,
-  ForwardRefExample,
+  RemoveCursorExample,
+  SplitterByWordExample,
+  SplitterComplexCharactersExample
 } from '../components/examples';
 import { Callout, Tabs, Tab } from 'nextra-theme-docs';
 
@@ -43,6 +45,12 @@ Include the initial text in every string, and the **static part will only be typ
   repeat={Infinity}
 />
 ```
+
+<Callout type="info" emoji="💡">
+  Note: Typing complex characters like emojis requires a custom [splitter function](#typing-complex-characters). 
+</Callout>
+
+
 
 ### Initially Pre-rendered
 
@@ -130,7 +138,7 @@ As mentioned in the [props](/options#component-props) section, you can specify b
 <CustomSpeedExample />
 
 <Callout type="info" emoji="💡">
-  Note: by default, the animation **adds a random delay relative to your
+  Note: The animation **adds a random delay relative to your
   provided `speed` and `deletionSpeed`** after each keystroke to make the typing
   animation look more natural.
 </Callout>
@@ -172,7 +180,7 @@ Line Seven`, // actual line-break inside string literal also gets animated in ne
 
 ---
 
-## Callback functions
+## Callback Functions
 
 Use callback functions at any place inside of your animation
 sequence to perform any (global) actions you want. An exemplary
@@ -210,15 +218,59 @@ const [typingStatus, setTypingStatus] = useState('Initializing');
 />;
 ```
 
-### Manipulation via css classes
+### Manipulation via CSS Classes
 
 It's possible to manipulate the animation styles in order to, for example, **stop the cursor animation at a specific point within the animation sequence**:
 
 <br />
 
-<ForwardRefExample />
+<RemoveCursorExample />
 
-<Tabs items={["with ref", "with callback functions"]}>
+<Tabs items={["Callback Functions", "useRef Hook", ]}>
+
+<Tab>
+
+```tsx {6,10,17,19}
+const CURSOR_CLASS_NAME = 'custom-type-animation-cursor';
+
+return (
+  <>
+    <TypeAnimation
+      cursor={false}
+      style={{
+        fontSize: '1.75rem',
+      }}
+      className={CURSOR_CLASS_NAME}
+      sequence={[
+        'One',
+        800,
+        'One Two',
+        800,
+        'One Two Three',
+        (el) => el.classList.remove(CURSOR_CLASS_NAME), // A reference to the element gets passed as the first argument of a callback function
+        6000,
+        (el) => el.classList.add(CURSOR_CLASS_NAME),
+        '',
+      ]}
+      repeat={Infinity}
+    />
+
+    <style global jsx>{`
+      .custom-type-animation-cursor::after {
+        content: '|';
+        animation: cursor 1.1s infinite step-start;
+      }
+      @keyframes cursor {
+        50% {
+          opacity: 0;
+        }
+      }
+    `}</style>
+  </>
+);
+```
+
+</Tab>
 
 <Tab>
 ```tsx {1,10,12,14,22-23,27,34,36}
@@ -281,54 +333,9 @@ return (
 ```
 </Tab>
 
-<Tab>
-
-```tsx {6,7,11,18,20}
-const CURSOR_CLASS_NAME = 'custom-type-animation-cursor';
-
-return (
-  <>
-    <TypeAnimation
-      ref={ref}
-      cursor={false}
-      style={{
-        fontSize: '1.75rem',
-      }}
-      className={CURSOR_CLASS_NAME}
-      sequence={[
-        'One',
-        800,
-        'One Two',
-        800,
-        'One Two Three',
-        (el) => el.classList.remove(CURSOR_CLASS_NAME), // A reference to the element gets passed as the first argument of a callback function
-        2000,
-        (el) => el.classList.add(CURSOR_CLASS_NAME),
-        '',
-      ]}
-      repeat={Infinity}
-    />
-
-    <style global jsx>{`
-      .custom-type-animation-cursor::after {
-        content: '|';
-        animation: cursor 1.1s infinite step-start;
-      }
-      @keyframes cursor {
-        50% {
-          opacity: 0;
-        }
-      }
-    `}</style>
-  </>
-);
-```
-
-</Tab>
-
 </Tabs>
 
-### Manipulation via state
+### Manipulation via State
 
 By applying dynamic styles to **the parent element** of the `TypeAnimation` component, you can easily manipulate styles without classNames and passing ref.
 
@@ -385,5 +392,68 @@ return (
       Change Color
     </button>
   </>
+);
+```
+
+<br/>
+
+### Custom Splitter
+
+By default, strings placed inside the `sequence` are split character by character, to simulate keyboard-like typing. With he help of the `splitter` prop, it's possible to define a custom splitting of sequence strings.
+
+#### Typing Word by Word
+
+To create a word-level typing animation similar to ChatGPT or other AI chatbots, we can **split strings into single words**, rather than characters.
+
+<SplitterByWordExample/>
+```tsx  {2,8}
+   <TypeAnimation
+        splitter={(str) => str.split(/(?= )/)} // 'abc' => ['a', ' b', ' c']
+        sequence={[
+          'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+          3000,
+          '',
+        ]}
+        speed={{ type: 'keyStrokeDelayInMs', value: 30 }}
+        omitDeletionAnimation={true}
+        style={{ fontSize: '1em', display: 'block', minHeight: '200px' }}
+        repeat={Infinity}
+      />
+```
+
+#### Typing Complex Characters
+
+As certain complex Unicode characters, like **emojis**, are internally represented as multiple characters in JavaScript, including them in our animation requires an advanced string splitter, such as [grapheme-splitter](https://www.npmjs.com/package/grapheme-splitter), capable of splitting those characters into *extended grapheme clusters* (single letters).
+
+<SplitterComplexCharactersExample/>
+
+
+```tsx {1,3,7}
+import GraphemeSplitter from 'grapheme-splitter'; // npm i grapheme-splitter
+
+const splitter = new GraphemeSplitter();
+
+return (
+  <TypeAnimation
+        splitter={(str) => splitter.splitGraphemes(str)}
+        sequence={[
+          'Hello 🇬🇧',
+          2000,
+          'Ciao 🇮🇹',
+          2000,
+          '你好 🇨🇳',
+          2000,
+          'Здравейте 🇧🇬 ',
+          2000,
+          'Hola 🇪🇸',
+          2000,
+          'Bonjour 🇫🇷',
+          2000,
+          'नमस्ते 🇮🇳',
+          2000
+        ]}
+        style={{ fontSize: '2em' }}
+        repeat={Infinity}
+      />
 );
 ```

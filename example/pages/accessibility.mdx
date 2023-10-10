@@ -6,12 +6,9 @@ Because the typing animation _A)_ delays and _B)_ constantly manipulates the wri
 
 If your type animation component includes **actual text ("content")** or conveys an important message that is not purely decorative, you should make your typewriter animation accessible to screen readers.
 
-## 1st Approach: visually-hidden class
+## Visually-hidden Class
 
-The perhaps best approach to make the typewriter animation accessible is
-
-1. Additionally rendering the conveyed message of the `<TypeAnimation />` in a separate wrapper with a _visually-hidden_ class that only hides the content for sighted users
-2. and setting `aria-hidden="true"` on the `<TypeAnimation />` to remove it from the a11y tree:
+The perhaps best approach to make a typewriter animation accessible is **1.)** additionally rendering the conveyed message of the `<TypeAnimation />` in a separate wrapper with a _visually-hidden_ class that only hides the content for sighted users and **2.)** setting `aria-hidden="true"` on the `<TypeAnimation />` to remove it from the a11y tree:
 
 ```tsx {2-16,18}
 <span style={{ position: 'relative' }}>
@@ -47,9 +44,9 @@ The perhaps best approach to make the typewriter animation accessible is
 </span>
 ```
 
-## 2nd Approach: aria-label
+## Alternative: aria-label
 
-You can also add an `aria-label` directly on the `<TypeAnimation />` component to convey the most important contents of the typewriter animation:
+One can also add an `aria-label` directly on the `<TypeAnimation />` component to convey the most important contents of the typewriter animation:
 
 ```tsx {2}
 <TypeAnimation
@@ -75,11 +72,12 @@ Setting an `aria-label` requires setting a `role` as well. The role [`marquee`](
 
 By applying an `aria-label`, the dynamically typed contents of your sequence will automatically be wrapped in a `<span/>` with `aria-hidden="true"` and removed from the accessibility tree:
 
-```html {aria-hidden="true"}
+```tsx {aria-hidden="true"}
+{/* Rendered HTML: */}
 <div
   aria-label="We produce food for Mice, Hamsters, Guinea Pigs and Chinchillas"
 >
-  <span aria-hidden="true">We pro</span>
+  <span aria-hidden="true">We pro [...]</span>
 </div>
 ```
 

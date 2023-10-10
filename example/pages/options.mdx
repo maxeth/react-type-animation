@@ -86,10 +86,10 @@ import { Callout, Tab, Tabs, Steps } from 'nextra-theme-docs';
     ],
     [
         'splitter',
-        '(text: string) => Array[string]',
-        'Used for splitting complex characters, see the npm package "grapheme-splitter" for more details',
+        '(text: string) => Array<string>',
+        'Custom string splitter, e.g for typing complex characters, such as those handled by the npm package "grapheme-splitter"',
         '(str) => new GraphemeSplitter().splitGraphemes(str)',
-        `String.split('')`,
+        `(str) => [...str]`,
     ]
   ]}
 
@@ -102,6 +102,7 @@ See [all examples](/examples) to see all props in usage.
 - `ref`, `className` see [here](/examples#manipulation-via-css-classes).
 - `speed`, `deletionSpeed` see [here](/examples#custom-speed).
 - `preRenderFirstString` see [here](/examples#initially-pre-rendered).
+- `splitter` see [here](/examples#custom-splitter)
 
 ## Custom Cursor Animation
 

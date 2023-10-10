@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
-import TypeAnimation from '../TypeAnimation';
+import GraphemeSplitter from 'grapheme-splitter';
+import { useState } from 'react';
 import { TypeAnimation as RawTypeAnimation } from 'react-type-animation';
+import TypeAnimation from '../TypeAnimation';
 
 export function CallbackExample() {
   const [typingStatus, setTypingStatus] = useState('Initializing');
@@ -62,6 +63,55 @@ export function LandingPageExample() {
     </div>
   );
 }
+
+export function SplitterByWordExample() {
+  return (
+    <div className="mt-8">
+      <TypeAnimation
+        sequence={[
+          'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+          3000,
+          '',
+        ]}
+        speed={{ type: 'keyStrokeDelayInMs', value: 30 }}
+        omitDeletionAnimation={true}
+        style={{ fontSize: '1em', display: 'block', minHeight: '200px' }}
+        splitter={(str) => str.split(/(?= )/)} // 'abc' => ['a', ' b', ' c']
+        repeat={Infinity}
+      />
+    </div>
+  );
+}
+
+export function SplitterComplexCharactersExample() {
+  const splitter = new GraphemeSplitter();
+  return (
+    <div className="font-bold mt-8">
+      <TypeAnimation
+        sequence={[
+          'Hello 🇬🇧',
+          2000,
+          'Ciao 🇮🇹',
+          2000,
+          '你好 🇨🇳',
+          2000,
+          'Здравейте 🇧🇬 ',
+          2000,
+          'Hola 🇪🇸',
+          2000,
+          'Bonjour 🇫🇷',
+          2000,
+          'नमस्ते 🇮🇳',
+          2000,
+        ]}
+        style={{ fontSize: '2em' }}
+        splitter={(str) => splitter.splitGraphemes(str)}
+        repeat={Infinity}
+      />
+    </div>
+  );
+}
+
 export function LandingPagePreTypedExample() {
   return (
     <span
@@ -150,7 +200,7 @@ export function StateManipulationColorExample() {
   return (
     <>
       <div
-        className="w-full bg-blue-400 bg-opacity-10 p-3 rounded-lg text-[1.75rem]"
+        className="w-full bg-blue-400/10 p-3 rounded-lg text-[1.75rem]"
         style={{
           color: textColor,
           fontSize: '35px',
@@ -189,7 +239,7 @@ export function StateManipulationColorExample() {
           ];
           setTextColor(items[Math.floor(Math.random() * items.length)]);
         }}
-        className="border rounded-lg bg-gray-100 dark:bg-gray-600 p-3 mt-3"
+        className="border rounded-lg bg-gray-100 dark:bg-gray-800 dark:border-gray-700 p-3 mt-3"
       >
         Change Color
       </button>
@@ -197,29 +247,13 @@ export function StateManipulationColorExample() {
   );
 }
 
-export function ForwardRefExample() {
-  const ref = React.createRef<HTMLSpanElement>(); // HTMLSpanElement because in this example we set wrapper="span"
-
+export function RemoveCursorExample() {
   const CURSOR_CLASS_NAME = 'custom-type-animation-cursor';
-
-  const showCursorAnimation = (show: boolean) => {
-    if (!ref.current) {
-      return;
-    }
-
-    const el = ref.current;
-    if (show) {
-      el.classList.add(CURSOR_CLASS_NAME);
-    } else {
-      el.classList.remove(CURSOR_CLASS_NAME);
-    }
-  };
 
   return (
     <>
-      <span className="w-full block bg-blue-400 bg-opacity-10 p-3 rounded-lg">
+      <span className="w-full block bg-blue-400/10 p-3 rounded-lg">
         <RawTypeAnimation
-          ref={ref}
           cursor={false}
           style={{
             fontSize: '1.75rem',
@@ -231,11 +265,10 @@ export function ForwardRefExample() {
             'One Two',
             800,
             'One Two Three',
-            // () => showCursorAnimation(false),
             (el) => {
               el.classList.remove(CURSOR_CLASS_NAME);
             },
-            2000,
+            6000,
             (el) => {
               el.classList.add(CURSOR_CLASS_NAME);
             },
@@ -320,7 +353,7 @@ export function CustomSpeedExample() {
 export function SpanCollapsingExample() {
   return (
     <div
-      className="w-full border-blue-400 bg-blue-400 bg-opacity-10 p-3 rounded-lg text-[1.75rem]"
+      className="w-full border-blue-400 bg-blue-400/10 p-3 rounded-lg text-[1.75rem]"
       style={{
         fontSize: '28px',
         height: '100px',
@@ -342,7 +375,7 @@ export function SpanCollapsingExample() {
 export function DisplayBlockCollapsingExample() {
   return (
     <div
-      className="w-full bg-blue-400 bg-opacity-10 p-3 rounded-lg text-[1.75rem]"
+      className="w-full bg-blue-400/10 p-3 rounded-lg text-[1.75rem]"
       style={{
         fontSize: '28px',
       }}
@@ -365,7 +398,7 @@ export function DisplayBlockCollapsingExample() {
 export function WordBreakExample(props: any) {
   return (
     <div
-      className="w-full flex gap-x-8 flex-wrap bg-blue-400 bg-opacity-10 p-3 rounded-lg text-[1.75rem]"
+      className="w-full flex gap-x-8 flex-wrap bg-blue-400/10 p-3 rounded-lg text-[1.75rem]"
       style={{
         fontSize: '28px',
       }}
