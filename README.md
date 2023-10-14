@@ -2,6 +2,9 @@
 
 A customizable React typing animation component.
 
+<img style="float:left;margin-left:16px" src="https://raster.shields.io/npm/v/react-type-animation.png?logo=npm"/>
+<img style="margin-left:7px" src="https://raster.shields.io/npm/dt/react-type-animation.png">
+
 ## Installation
 
 ```bash
@@ -14,7 +17,7 @@ or
 yarn add react-type-animation
 ```
 
-Requires a `react` and `react-dom` version of at least 15.0.0.
+Requires a `react` and `react-dom` version of at least `15.0.0`.
 
 ## Live Demo
 
@@ -22,7 +25,7 @@ A live demo and usage examples of the animation can be found at [https://react-t
 
 ## Usage
 
-A common typewriter animation for a landing page would look like this:
+A common typewriter animation for a landing page could look like this:
 
 ```jsx
 import { TypeAnimation } from 'react-type-animation';
@@ -39,7 +42,7 @@ const ExampleComponent = () => {
         'We produce food for Guinea Pigs',
         1000,
         'We produce food for Chinchillas',
-        1000
+        1000,
       ]}
       wrapper="span"
       speed={50}
@@ -74,20 +77,20 @@ Hence, whenever you make changes to the TypeAnimation component, you unfortunate
 
 See [https://react-type-animation.netlify.app/options](https://react-type-animation.netlify.app/options) for more details.
 
-| Prop                    | Required | Type                                                               | Example                                               | Description                                                                                                                  | Default            |
-|-------------------------|----------|--------------------------------------------------------------------|-------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| Prop                    | Required | Type                                                                 | Example                                               | Description                                                                                                                  | Default            |
+| ----------------------- | -------- | -------------------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------ |
 | `sequence`              | yes      | Array<number &#124; string &#124; (() => void &#124; Promise<void>)> | `['One', 1000, 'Two', () => console.log("done")]`     | Animation sequence: [TEXT, DELAY-MS, CALLBACK]                                                                               | `-`                |
-| `wrapper`               | no       | string                                                             | `p`,`h2`,`div`, `strong`                              | HTML element tag that wraps the typing animation                                                                             | `span`             |
-| `speed`                 | no       | 1,2,..,99 &#124; {type: "keyStrokeDelayInMs", value: number}       | `45`, `{type: "keyStrokeDelayInMs", value: 100}`      | Speed for the writing of the animation                                                                                       | `40`               |
-| `deletionSpeed`         | no       | 1,2,..,99 &#124; {type: "keyStrokeDelayInMs", value: number}       | `45`, `{type: "keyStrokeDelayInMs", value: 100}`      | Speed for deleting of the animation                                                                                          | `speed`            |
-| `omitDeletionAnimation` | no       | boolean                                                            | `false`, `true`                                       | If true, deletions will be instant and without animation                                                                     | `false`            |
-| `repeat`                | no       | number                                                             | `0`, `3`, `Infinity`                                  | Amount of animation repetitions                                                                                              | `0`                |
-| `cursor`                | no       | boolean                                                            | `false`, `true`                                       | Display default blinking cursor css-animation                                                                                | `true`             |
-| `preRenderFirstString`  | no       | boolean                                                            | `false`, `true`                                       | If true, the first string of your sequence will not be animated and initially (pre-)rendered                                 | `true`             |
-| `className`             | no       | string                                                             | `custom-class-name`                                   | HTML class name applied to the wrapper to style the text                                                                     | `-`                |
-| `style`                 | no       | object                                                             | `{fontSize: '2em'}`                                   | JSX inline style object                                                                                                      | `-`                |
-| `ref`                   | no       | HTMLElement &#124; null                                            | `-`                                                   | `-`                                                                                                                          | `-`                |
-| `splitter`              | no       | (text: string) => Array<string>                                    | `(str) => new GraphemeSplitter().splitGraphemes(str)` | Used for splitting complex characters, see [grapheme-splitter](https://github.com/orling/grapheme-splitter) for more details | `String.split('')` |
+| `wrapper`               | no       | string                                                               | `p`,`h2`,`div`, `strong`                              | HTML element tag that wraps the typing animation                                                                             | `span`             |
+| `speed`                 | no       | 1,2,..,99 &#124; {type: "keyStrokeDelayInMs", value: number}         | `45`, `{type: "keyStrokeDelayInMs", value: 100}`      | Speed for the writing of the animation                                                                                       | `40`               |
+| `deletionSpeed`         | no       | 1,2,..,99 &#124; {type: "keyStrokeDelayInMs", value: number}         | `45`, `{type: "keyStrokeDelayInMs", value: 100}`      | Speed for deleting of the animation                                                                                          | `speed`            |
+| `omitDeletionAnimation` | no       | boolean                                                              | `false`, `true`                                       | If true, deletions will be instant and without animation                                                                     | `false`            |
+| `repeat`                | no       | number                                                               | `0`, `3`, `Infinity`                                  | Amount of animation repetitions                                                                                              | `0`                |
+| `cursor`                | no       | boolean                                                              | `false`, `true`                                       | Display default blinking cursor css-animation                                                                                | `true`             |
+| `preRenderFirstString`  | no       | boolean                                                              | `false`, `true`                                       | If true, the first string of your sequence will not be animated and initially (pre-)rendered                                 | `true`             |
+| `className`             | no       | string                                                               | `custom-class-name`                                   | HTML class name applied to the wrapper to style the text                                                                     | `-`                |
+| `style`                 | no       | object                                                               | `{fontSize: '2em'}`                                   | JSX inline style object                                                                                                      | `-`                |
+| `ref`                   | no       | HTMLElement &#124; null                                              | `-`                                                   | `-`                                                                                                                          | `-`                |
+| `splitter`              | no       | (text: string) => Array<string>                                      | `(str) => new GraphemeSplitter().splitGraphemes(str)` | Used for splitting complex characters, see [grapheme-splitter](https://github.com/orling/grapheme-splitter) for more details | `String.split('')` |
 
 ---
 
@@ -97,4 +100,3 @@ See [https://react-type-animation.netlify.app/options](https://react-type-animat
 
 [npm](https://www.npmjs.com/package/react-type-animation) / [github](https://github.com/maxeth/react-type-animation/)
 Credits: [typical](https://github.com/camwiegert/typical)
-Shoutouts/Supporters: [blockig](https://www.blockig.com/)
