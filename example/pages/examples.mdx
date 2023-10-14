@@ -397,11 +397,11 @@ return (
 
 <br/>
 
-### Custom Splitter
+## Custom String Splitter
 
 By default, strings placed inside the `sequence` are split character by character, to simulate keyboard-like typing. With he help of the `splitter` prop, it's possible to define a custom splitting of sequence strings.
 
-#### Typing Word by Word
+### Typing Word by Word
 
 To create a word-level typing animation similar to ChatGPT or other AI chatbots, we can **split strings into single words**, rather than characters.
 
@@ -421,7 +421,7 @@ To create a word-level typing animation similar to ChatGPT or other AI chatbots,
       />
 ```
 
-#### Typing Complex Characters
+### Typing Complex Characters
 
 As certain complex Unicode characters, like **emojis**, are internally represented as multiple characters in JavaScript, including them in our animation requires an advanced string splitter, such as [grapheme-splitter](https://www.npmjs.com/package/grapheme-splitter), capable of splitting those characters into *extended grapheme clusters* (single letters).
 
