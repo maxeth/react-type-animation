@@ -6,6 +6,8 @@
 
 A customizable React typing animation component.
 
+[npm_url]: https://www.npmjs.org/package/react-type-animation
+
 ## Installation
 
 ```bash
