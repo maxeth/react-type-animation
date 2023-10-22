@@ -76,7 +76,7 @@ export function SplitterByWordExample() {
         speed={{ type: 'keyStrokeDelayInMs', value: 30 }}
         omitDeletionAnimation={true}
         style={{ fontSize: '1em', display: 'block', minHeight: '200px' }}
-        splitter={(str) => str.split(/(?= )/)} // 'abc' => ['a', ' b', ' c']
+        splitter={(str) => str.split(/(?= )/)} // 'Lorem ipsum dolor' -> ['Lorem', ' ipsum', ' dolor']
         repeat={Infinity}
       />
     </div>

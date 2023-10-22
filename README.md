@@ -1,9 +1,10 @@
 # react-type-animation
 
-A customizable React typing animation component.
+[![npm version](https://badge.fury.io/js/react-type-animation.svg)][npm_url]
+[![downloads](https://img.shields.io/npm/dt/react-type-animation.svg)][npm_url]
+[![license](https://img.shields.io/npm/l/react-type-animation.svg)][npm_url]
 
-<img style="float:left;margin-left:16px" src="https://raster.shields.io/npm/v/react-type-animation.png?logo=npm"/>
-<img style="margin-left:7px" src="https://raster.shields.io/npm/dt/react-type-animation.png">
+A customizable React typing animation component.
 
 ## Installation
 
