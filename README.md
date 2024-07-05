@@ -33,7 +33,7 @@ A common typewriter animation for a landing page could look like this:
 ```jsx
 import { TypeAnimation } from 'react-type-animation';
 
-const ExampleComponent = () => {
+const ExampleComponent = ({ onEndTypeAnimation }) => {
   return (
     <TypeAnimation
       sequence={[
@@ -46,6 +46,7 @@ const ExampleComponent = () => {
         1000,
         'We produce food for Chinchillas',
         1000,
+        (element) => onEndTypeAnimation?.(element),
       ]}
       wrapper="span"
       speed={50}
