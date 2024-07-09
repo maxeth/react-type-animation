@@ -106,36 +106,9 @@ const config: DocsThemeConfig = {
           >
             npm
           </a>
-          /
-          <span>
-            Shoutouts & Supporters:{' '}
-            <a
-              className="underline"
-              href="https://www.blockig.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              blockig
-            </a>
-          </span>
         </div>
       </footer>
-    ),
-    // text: (
-    //   <div style={{ display: 'flex' }}>
-    //     <a href="https://nextra.site" target="_blank">
-    //       Other
-    //     </a>
-
-    //     <a
-    //       href="https://nextra.site"
-    //       target="_blank"
-    //       style={{ marginLeft: '8px' }}
-    //     >
-    //       blockig
-    //     </a>
-    //   </div>
-    // ),
+    )
   },
 };
 
