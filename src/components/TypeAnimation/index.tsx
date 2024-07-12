@@ -93,11 +93,6 @@ const TypeAnimation = forwardRef<
         omitDeletionAnimation,
         ...restArgs
       );
-
-      return () => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        typeRef.current;
-      };
     });
 
     const WrapperEl = wrapper;
